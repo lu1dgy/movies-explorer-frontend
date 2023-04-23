@@ -8,3 +8,7 @@
   font-weight: 400;
   color: #000;
 }
+
+html {
+  scroll-behavior: smooth;
+}

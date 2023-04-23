@@ -5,14 +5,18 @@ import img from '../../../images/web.svg'
 const Promo = () => {
   return (
     <section className={style.promo}>
-      <div className={style.promoContainer}>
-        <div className={style.textContainer}>
-          <h1 className={style.heading}>Учебный проект студента факультета Веб-разработки.</h1>
-          <p className={style.text}>Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
-          <button className={style.btn}>Узнать больше</button>
+      <div className={style.promo__container}>
+        <div className={style.promo__textContainer}>
+          <h1 className={style.promo__heading}>Учебный проект студента факультета Веб-разработки.</h1>
+          <p className={style.promo__text}>Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
+          <a
+            href='#portfolio'
+            className={style.promo__btn}>
+            Узнать больше
+          </a>
         </div>
         <img
-          className={style.img}
+          className={style.promo__img}
           src={img}
           alt=''
         />

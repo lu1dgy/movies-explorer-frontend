@@ -1,7 +1,8 @@
 .about {
   background-color: #fff;
 }
-.heading {
+
+.about__heading {
   font-size: 22px;
   line-height: 27px;
   padding-bottom: 23px;
@@ -9,7 +10,7 @@
   border-bottom: 1px solid #000;
 }
 
-.aboutContainer {
+.about__container {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
@@ -18,44 +19,46 @@
   padding: 110px 70px 100px;
 }
 
-.profession {
+.about__profession {
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
 }
 
-.portfolio {
+.about__portfolio {
   display: flex;
   margin-top: 66px;
+  gap: 270px;
 }
 
-.name {
+.about__name {
   font-size: 50px;
   line-height: 58px;
   letter-spacing: -0.04em;
 }
 
-.information {
+.about__information {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-.text {
+.about__text {
   margin-top: 8px;
   font-size: 14px;
   line-height: 22px;
 }
 
-.link {
+.about__link {
   margin-top: 81px;
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  color: #000;
 }
 
-.avatar {
+.about__avatar {
   width: 270px;
   height: 327px;
   object-fit: cover;
@@ -63,76 +66,76 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .aboutContainer {
+  .about__container {
     padding: 90px 50px;
   }
 
-  .name {
+  .about__name {
     font-size: 40px;
     line-height: 40px;
   }
 
-  .profession {
+  .about__profession {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .text {
+  .about__text {
     font-size: 12px;
     line-height: 18px;
     margin-top: 4px;
   }
 
-  .avatar {
+  .about__avatar {
     width: 255px;
     height: 307px;
   }
 
-  .information {
+  .about__information {
     gap: 16px;
   }
 
-  .link {
+  .about__link {
     margin-top: 71px;
   }
 }
 @media screen and (max-width: 767px) {
-  .aboutContainer {
+  .about__container {
     padding: 70px 14px;
   }
 
-  .portfolio {
+  .about__portfolio {
     flex-direction: column-reverse;
     align-items: center;
     gap: 40px;
     margin-top: 60px;
   }
 
-  .heading {
+  .about__heading {
     padding-bottom: 28px;
   }
 
-  .avatar {
+  .about__avatar {
     width: 292px;
     height: 352px;
   }
 
-  .name {
+  .about__name {
     font-size: 30px;
     line-height: 36px;
   }
 
-  .profession {
+  .about__profession {
     font-size: 11px;
     line-height: 16px;
   }
 
-  .text {
+  .about__text {
     font-size: 11px;
     line-height: 16px;
   }
 
-  .link {
+  .about__link {
     margin-top: 24px;
   }
 }

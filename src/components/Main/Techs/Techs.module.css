@@ -2,7 +2,7 @@
   background-color: #f5f5f5;
 }
 
-.techsContainer {
+.techs__container {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
@@ -11,7 +11,7 @@
   padding: 100px 70px;
 }
 
-.info {
+.techs__info {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
   gap: 26px;
 }
 
-.heading {
+.techs__heading {
   font-size: 22px;
   line-height: 27px;
   padding-bottom: 23px;
@@ -27,14 +27,14 @@
   border-bottom: 1px solid #000;
 }
 
-.list {
+.techs__list {
   list-style-type: none;
   display: flex;
   gap: 10px;
   margin-top: 74px;
 }
 
-.item {
+.techs__item {
   width: 90px;
   height: 60px;
   background-color: #e8e8e8;
@@ -47,14 +47,14 @@
   letter-spacing: -0.04em;
 }
 
-.subheading {
+.techs__subheading {
   font-size: 50px;
   line-height: 58px;
   letter-spacing: -0.04em;
   text-align: center;
 }
 
-.text {
+.techs__text {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.04em;
@@ -63,35 +63,35 @@
 }
 
 @media screen and (max-width: 1279px) {
-  .item {
+  .techs__item {
     width: 84px;
     height: 57px;
     font-size: 12px;
     line-height: 15px;
   }
 
-  .techsContainer {
+  .techs__container {
     padding: 90px 60px;
   }
 }
 @media screen and (max-width: 767px) {
-  .info {
+  .techs__info {
     margin-top: 60px;
     gap: 24px;
   }
 
-  .techsContainer {
+  .techs__container {
     padding: 70px 18px;
   }
 
-  .list {
+  .techs__list {
     flex-wrap: wrap;
     gap: 10px;
     max-width: 178px;
     margin-top: 26px;
   }
 
-  .subheading {
+  .techs__subheading {
     font-size: 30px;
     line-height: 36px;
   }

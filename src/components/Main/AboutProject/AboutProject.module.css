@@ -1,8 +1,8 @@
-.about {
+.aboutme {
   background-color: #fff;
 }
 
-.aboutContainer {
+.aboutme__container {
   display: flex;
   flex-direction: column;
   max-width: 1280px;
@@ -12,18 +12,18 @@
   padding: 90px 70px;
 }
 
-.articleContainer {
+.aboutme__articleContainer {
   display: flex;
   gap: 30px;
 }
 
-.article {
+.aboutme__article {
   display: flex;
   flex-direction: column;
   gap: 26px;
 }
 
-.heading {
+.aboutme__heading {
   font-size: 22px;
   line-height: 27px;
   padding-bottom: 23px;
@@ -31,25 +31,25 @@
   border-bottom: 1px solid #000;
 }
 
-.subheading {
+.aboutme__subheading {
   font-size: 20px;
   line-height: 24px;
   letter-spacing: -0.04em;
 }
 
-.text {
+.aboutme__text {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
 }
 
-.bar {
+.aboutme__bar {
   margin-top: 40px;
   display: flex;
   align-self: center;
 }
 
-.blackBar {
+.aboutme__blackBar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +60,7 @@
   text-align: center;
 }
 
-.greyBar {
+.aboutme__greyBar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +71,7 @@
   text-align: center;
 }
 
-.barContainer {
+.aboutme__barContainer {
   font-size: 14px;
   line-height: 17px;
   display: flex;
@@ -80,62 +80,62 @@
   gap: 14px;
 }
 
-.barText {
+.aboutme__barText {
   font-weight: 500;
   color: #a0a0a0;
 }
 
 @media screen and (max-width: 1279px) {
-  .aboutContainer {
+  .aboutme__container {
     padding-right: 50px;
     padding-left: 50px;
   }
 
-  .greyBar {
+  .aboutme__greyBar {
     width: 528px;
   }
 
-  .blackBar {
+  .aboutme__blackBar {
     width: 140px;
   }
 
-  .text {
+  .aboutme__text {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .articleContainer {
+  .aboutme__articleContainer {
     gap: 22px;
   }
 }
 @media screen and (max-width: 767px) {
-  .aboutContainer {
+  .aboutme__container {
     padding: 70px 18px;
     gap: 60px;
   }
 
-  .greyBar {
+  .aboutme__greyBar {
     width: 184px;
   }
 
-  .blackBar {
+  .aboutme__blackBar {
     width: 100px;
   }
 
-  .articleContainer {
+  .aboutme__articleContainer {
     flex-direction: column;
     gap: 56px;
   }
 
-  .article {
+  .aboutme__article {
     gap: 16px;
   }
 
-  .bar {
+  .aboutme__bar {
     margin-top: 0;
   }
 
-  .heading {
+  .aboutme__heading {
     font-size: 18px;
     line-height: 22px;
     padding-bottom: 27px;
@@ -143,17 +143,17 @@
     border-bottom: 1px solid #000;
   }
 
-  .subheading {
+  .aboutme__subheading {
     font-size: 18px;
     line-height: 22px;
   }
 
-  .text {
+  .aboutme__text {
     font-size: 11px;
     line-height: 16px;
   }
 
-  .barContainer {
+  .aboutme__barContainer {
     font-size: 14px;
     line-height: 17px;
     font-size: 11px;

@@ -10,20 +10,22 @@ const Portfolio = () => {
   ]
 
   return (
-    <section className={style.portfolio}>
-      <div className={style.portfolioContainer}>
-        <h2 className={style.heading}>Портфолио</h2>
-        <ul className={style.list}>
+    <section
+      className={style.portfolio}
+      id='portfolio'>
+      <div className={style.portfolio__container}>
+        <h2 className={style.portfolio__heading}>Портфолио</h2>
+        <ul className={style.portfolio__list}>
           {links.map((e, i) => (
             <li
-              className={style.item}
+              className={style.portfolio__item}
               key={i}>
               <a
-                className={style.link}
+                className={style.portfolio__link}
                 href={e.href}>
-                <span className={style.text}>{e.link}</span>
+                <span className={style.portfolio__text}>{e.link}</span>
                 <img
-                  className={style.arrow}
+                  className={style.portfolio__arrow}
                   src={arrow}
                   alt='arrow'
                 />
