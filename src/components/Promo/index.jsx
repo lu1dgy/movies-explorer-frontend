@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Promo.module.css'
-import img from '../../../images/web.svg'
+import img from '../../images/web.svg'
 
 const Promo = () => {
   return (

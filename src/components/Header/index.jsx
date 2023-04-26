@@ -1,10 +1,16 @@
 import React from 'react'
-import style from './Header.module.css'
+import { useLocation } from 'react-router-dom'
+
 import logo from '../../images/logo.svg'
 
+import style from './Header.module.css'
+
 const Header = () => {
+  const location = useLocation()
+  const backgroundColor = location.pathname === '/main' ? '' : style.header_white
+
   return (
-    <header className={style.header}>
+    <header className={style.header + ' ' + backgroundColor}>
       <div className={style.header__container}>
         <img
           src={logo}

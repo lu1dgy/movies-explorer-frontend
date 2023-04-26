@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Portfolio.module.css'
-import arrow from '../../../images/arrow.svg'
+import arrow from '../../images/arrow.svg'
 
 const Portfolio = () => {
   const links = [

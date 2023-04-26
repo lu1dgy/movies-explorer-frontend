@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './AboutMe.module.css'
-import avatar from '../../../images/me.jpg'
+import avatar from '../../images/me.jpg'
 
 const AboutMe = () => {
   return (
@@ -10,7 +10,7 @@ const AboutMe = () => {
         <div className={style.about__portfolio}>
           <div className={style.about__information}>
             <h3 className={style.about__name}>Александр</h3>
-            <p className={style.about__profession}>Фронтенд-разработчик, 30 лет</p>
+            <p className={style.about__profession}>Фронтенд-разработчик, 23 лет</p>
             <p className={style.about__text}>
               Я родился и вырос в Самаре, и с самого детства увлекаюсь технологиями. В мире веб-разработки я чувствую
               себя как рыба в воде, и мой стек технологий включает ReactJS, TypeScript, Redux, Express и MongoDB.
