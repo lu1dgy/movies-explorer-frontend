@@ -45,6 +45,11 @@
   color: #fff;
   border-radius: 3px;
   border: 0;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  opacity: 0.7;
 }
 
 .form__checkblock {

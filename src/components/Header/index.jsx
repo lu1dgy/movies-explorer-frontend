@@ -7,7 +7,7 @@ import style from './Header.module.css'
 
 const Header = () => {
   const location = useLocation()
-  const backgroundColor = location.pathname === '/main' ? '' : style.header_white
+  const backgroundColor = location.pathname === '/' ? '' : style.header_white
 
   return (
     <header className={style.header + ' ' + backgroundColor}>

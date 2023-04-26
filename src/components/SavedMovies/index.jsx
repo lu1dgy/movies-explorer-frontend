@@ -3,8 +3,8 @@ import MoviesCard from '../MoviesCard'
 import MoviesCardList from '../MoviesCardList'
 import SearchForm from '../SearchForm'
 
-const Movies = () => {
-  const components = Array(15).fill(null)
+const SavedMovies = () => {
+  const components = Array(2).fill(null)
   return (
     <div>
       <SearchForm />
@@ -18,4 +18,4 @@ const Movies = () => {
   )
 }
 
-export default Movies
+export default SavedMovies
