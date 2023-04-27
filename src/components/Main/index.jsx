@@ -4,17 +4,20 @@ import AboutProject from '../AboutProject'
 import Portfolio from '../Portfolio'
 import Promo from '../Promo'
 import Techs from '../Techs'
-import style from './Main.module.css'
+import Header from '../Header'
+import Footer from '../Footer'
 
 const Main = () => {
   return (
-    <div className={style.main}>
+    <>
+      <Header />
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-    </div>
+      <Footer />
+    </>
   )
 }
 

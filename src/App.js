@@ -1,15 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Footer from './components/Footer'
-import Header from './components/Header'
 import Main from './components/Main'
 import Movies from './components/Movies'
+import Profile from './components/Profile'
 import SavedMovies from './components/SavedMovies'
 
 const App = () => {
   return (
     <>
-      <Header />
       <Routes>
         <Route
           path='/'
@@ -23,8 +21,11 @@ const App = () => {
           path='/saved-movies'
           element={<SavedMovies />}
         />
+        <Route
+          path='/profile'
+          element={<Profile />}
+        />
       </Routes>
-      <Footer />
     </>
   )
 }
