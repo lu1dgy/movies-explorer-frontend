@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 import logo from '../../images/logo.svg'
 import account from '../../images/profile.svg'
@@ -8,9 +8,25 @@ import style from './Header.module.css'
 
 const Header = () => {
   const location = useLocation()
+  const [isOpened, setIsOpened] = useState(false)
+  const body = document.body
 
   const backgroundColor = location.pathname === '/' ? '' : style.header_white
   const isMainPage = location.pathname === '/'
+
+  //предотвращаем скролл при открытом меню
+  const setBodyOverflow = (opened) => {
+    if (opened) {
+      body.style.overflow = ''
+    } else {
+      body.style.overflow = 'hidden'
+    }
+  }
+
+  const handleBurgerClick = () => {
+    setIsOpened(!isOpened)
+    setBodyOverflow(isOpened)
+  }
 
   return (
     <header className={`${style.header} ${backgroundColor}`}>
@@ -29,23 +45,32 @@ const Header = () => {
         ) : (
           <>
             <nav className={style.header__menu}>
-              <ul className={style.header__list}>
+              <ul className={`${style.header__list} ${isOpened ? style.header__list_active : ''}`}>
+                {isOpened && (
+                  <li className={style.header__item}>
+                    <NavLink
+                      to={'/'}
+                      className={(link) => (link.isActive ? style.header__link_active : style.header__link)}>
+                      Главная
+                    </NavLink>
+                  </li>
+                )}
                 <li className={style.header__item}>
-                  <Link
+                  <NavLink
                     to={'/movies'}
-                    className={style.header__link}>
+                    className={(link) => (link.isActive ? style.header__link_active : style.header__link)}>
                     Фильмы
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className={style.header__item}>
-                  <Link
-                    className={style.header__link}
+                  <NavLink
+                    className={(link) => (link.isActive ? style.header__link_active : style.header__link)}
                     to={'/saved-movies'}>
                     Сохранённые фильмы
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className={style.header__item}>
-                  <Link
+                  <NavLink
                     className={style.header__link}
                     to='/profile'>
                     <img
@@ -53,15 +78,18 @@ const Header = () => {
                       src={account}
                       alt={'profile'}
                     />
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </nav>
-            <button className={style.header__burger}>
+            <button
+              className={`${style.header__burger} ${isOpened && style.header__burger_active}`}
+              onClick={handleBurgerClick}>
               <div className={style.header__line}></div>
               <div className={style.header__line}></div>
               <div className={style.header__line}></div>
             </button>
+            <div className={isOpened ? style.header__overlay : ''}></div>
           </>
         )}
       </div>

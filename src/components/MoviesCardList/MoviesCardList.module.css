@@ -1,5 +1,6 @@
 .movies {
   background-color: #fff;
+  position: relative;
 }
 
 .movies__container {
@@ -42,6 +43,7 @@
 .movies__more:hover {
   opacity: 0.7;
 }
+
 .movies__more_hide {
   visibility: hidden;
 }
