@@ -1,0 +1,162 @@
+.profile {
+  background-color: #fff;
+}
+
+.profile__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 74px 0 70px;
+  gap: 123px;
+}
+
+.profile__heading {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__fieldset {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+}
+
+.profile__input {
+  background-color: transparent;
+  border: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  width: 122px;
+  height: 14px;
+}
+
+.profile__input:focus {
+  border: 0;
+}
+
+.profile__input::placeholder {
+  position: absolute;
+  color: #000;
+  right: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.profile__buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 220px;
+  gap: 16px;
+}
+
+.profile__line {
+  height: 1px;
+  pointer-events: none;
+  background-color: #e8e8e8;
+  margin: 16px 0 17px;
+  width: 410px;
+}
+
+.profile__name {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  width: 141px;
+}
+
+.profile__email {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  width: 141px;
+}
+
+.profile__label {
+  display: flex;
+  gap: 147px;
+}
+
+.profile__edit {
+  background-color: transparent;
+  border: 0;
+  color: #000;
+  font-size: 13px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.profile__exit {
+  background-color: transparent;
+  border: 0;
+  color: #ff4062;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.profile__exit:hover {
+  opacity: 0.5;
+}
+
+.profile__edit:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 1279px) {
+  .profile__container {
+    padding-top: 236px;
+    padding-bottom: 269px;
+    gap: 96px;
+  }
+
+  .profile__buttons {
+    margin-top: 210px;
+    gap: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .profile__line {
+    width: 260px;
+  }
+
+  .profile__label {
+    gap: 10px;
+  }
+
+  .profile__name {
+    width: 130px;
+  }
+
+  .profile__email {
+    width: 130px;
+  }
+
+  .profile__container {
+    padding-top: 70px;
+    padding-bottom: 40px;
+    gap: 80px;
+  }
+
+  .profile__buttons {
+    margin-top: 379px;
+  }
+
+  .profile__edit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__exit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

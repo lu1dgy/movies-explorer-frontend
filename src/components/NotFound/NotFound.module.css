@@ -32,3 +32,20 @@
   color: #fff;
   border-radius: 3px;
 }
+
+@media screen and (max-width: 767px) {
+  .error__heading {
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .error__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .error__btn {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
