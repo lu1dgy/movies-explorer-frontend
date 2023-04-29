@@ -39,8 +39,16 @@ const Header = () => {
         </Link>
         {isMainPage ? (
           <div className={style.header__buttons}>
-            <button className={style.header__btn}>Регистрация</button>
-            <button className={style.header__btn + ' ' + style.header__active}>Войти</button>
+            <Link
+              to={'/register'}
+              className={style.header__btn}>
+              Регистрация
+            </Link>
+            <Link
+              to={'/login'}
+              className={style.header__btn + ' ' + style.header__active}>
+              Войти
+            </Link>
           </div>
         ) : (
           <>
