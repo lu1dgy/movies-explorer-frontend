@@ -108,6 +108,10 @@
   z-index: 2;
 }
 
+.header__burger:hover {
+  opacity: 0.7;
+}
+
 .header__burger_active .header__line:nth-of-type(1) {
   transform: rotate(45deg) translate(7px, 8px);
   width: 28px;
