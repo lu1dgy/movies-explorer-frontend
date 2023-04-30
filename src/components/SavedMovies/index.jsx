@@ -11,13 +11,15 @@ const SavedMovies = () => {
   return (
     <>
       <Header />
-      <SearchForm />
-      <MoviesCardList>
-        <MoviesCard isLiked={true} />
-        {components.map((e, i) => (
-          <MoviesCard key={i} />
-        ))}
-      </MoviesCardList>
+      <main>
+        <SearchForm />
+        <MoviesCardList>
+          <MoviesCard isLiked={true} />
+          {components.map((e, i) => (
+            <MoviesCard key={i} />
+          ))}
+        </MoviesCardList>
+      </main>
       <Footer />
     </>
   )

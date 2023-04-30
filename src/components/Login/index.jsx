@@ -7,7 +7,7 @@ import style from './Login.module.css'
 
 const Login = () => {
   return (
-    <div className={style.login}>
+    <main className={style.login}>
       <div className={style.login__container}>
         <Link to={'/'}>
           <img
@@ -55,7 +55,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   )
 }
 

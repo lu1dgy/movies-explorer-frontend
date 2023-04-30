@@ -4,7 +4,7 @@ import style from './NotFound.module.css'
 
 const NotFound = () => {
   return (
-    <div className={style.error}>
+    <main className={style.error}>
       <h1 className={style.error__heading}>404</h1>
       <p className={style.error__text}>Страница не найдена</p>
       <Link
@@ -12,7 +12,7 @@ const NotFound = () => {
         className={style.error__btn}>
         Назад
       </Link>
-    </div>
+    </main>
   )
 }
 

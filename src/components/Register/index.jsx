@@ -7,7 +7,7 @@ import style from './Register.module.css'
 
 const Register = () => {
   return (
-    <div className={style.register}>
+    <main className={style.register}>
       <div className={style.register__container}>
         <Link to={'/'}>
           <img
@@ -67,7 +67,7 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </div>
+    </main>
   )
 }
 
