@@ -12,19 +12,21 @@
   box-sizing: border-box;
   padding: 0 70px 80px;
   gap: 50px;
+  position: relative;
 }
 
 .movies__list {
   padding-top: 80px;
   border-top: 1px solid #e8e8e8;
   list-style-type: none;
-  display: flex;
+  display: grid;
+  justify-content: center;
   max-width: 1140px;
   width: 100%;
-  flex-wrap: wrap;
-  gap: 38px 20px;
   max-height: 1163px;
   overflow: hidden;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 38px 20px;
 }
 
 .movies__more {
@@ -59,8 +61,9 @@
   }
 
   .movies__list {
-    gap: 30px;
     max-height: 1236px;
+    grid-template-columns: repeat(2, 339px);
+    row-gap: 30px;
   }
 }
 
@@ -76,8 +79,8 @@
 
   .movies__list {
     padding-top: 50px;
-    gap: 34px;
     max-height: 1416px;
-    justify-content: center;
+    grid-template-columns: repeat(1, 300px);
+    row-gap: 34px;
   }
 }
