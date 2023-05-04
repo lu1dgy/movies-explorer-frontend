@@ -98,6 +98,10 @@
   .about__link {
     margin-top: 71px;
   }
+
+  .about__portfolio {
+    gap: 49px;
+  }
 }
 @media screen and (max-width: 767px) {
   .about__container {
