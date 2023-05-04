@@ -1,13 +1,13 @@
-import React from 'react'
-import style from './Portfolio.module.css'
-import arrow from '../../images/arrow.svg'
+import React from 'react';
+import style from './Portfolio.module.css';
+import arrow from '../../images/arrow.svg';
 
 const Portfolio = () => {
   const links = [
-    { link: 'Статичный сайт', href: '#' },
-    { link: 'Адаптивный сайт', href: '#' },
-    { link: 'Одностраничное приложение', href: '#' },
-  ]
+    { link: 'Статичный сайт', href: 'https://lu1dgy.github.io/Shelter/shelter/pages/' },
+    { link: 'Адаптивный сайт', href: 'https://react-pizza-v2-0-0.vercel.app/' },
+    { link: 'Одностраничное приложение', href: 'https://mesto.lapkes.nomoredomains.work/sign-in' },
+  ];
 
   return (
     <section
@@ -22,7 +22,9 @@ const Portfolio = () => {
               key={i}>
               <a
                 className={style.portfolio__link}
-                href={e.href}>
+                href={e.href}
+                rel='noreferrer'
+                target='_blank'>
                 <span className={style.portfolio__text}>{e.link}</span>
                 <img
                   className={style.portfolio__arrow}
@@ -35,7 +37,7 @@ const Portfolio = () => {
         </ul>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Portfolio
+export default Portfolio;
