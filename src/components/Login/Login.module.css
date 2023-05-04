@@ -10,6 +10,7 @@
   max-width: 396px;
   width: 100%;
   margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .login__logo {
@@ -117,6 +118,7 @@
 @media screen and (max-width: 1279px) {
   .login__container {
     margin-top: 232px;
+    margin-bottom: 232px;
   }
 
   .login__submit {
@@ -128,6 +130,7 @@
     align-items: center;
     margin-top: 56px;
     gap: 50px;
+    margin-bottom: 30px;
   }
 
   .login__heading {

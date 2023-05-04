@@ -10,6 +10,7 @@
   max-width: 396px;
   width: 100%;
   margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .register__logo {
@@ -117,6 +118,7 @@
 @media screen and (max-width: 1279px) {
   .register__container {
     margin-top: 232px;
+    margin-bottom: 232px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -124,6 +126,7 @@
     align-items: center;
     margin-top: 56px;
     gap: 50px;
+    margin-bottom: 30px;
   }
 
   .register__heading {
