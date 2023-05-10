@@ -11,6 +11,7 @@
   width: 100%;
   margin-top: 70px;
   margin-bottom: 70px;
+  overflow: hidden;
 }
 
 .register__logo {
@@ -43,20 +44,21 @@
 }
 
 .register__error {
-  visibility: hidden;
-}
-
-.register__error_active {
-  visibility: visible;
+  display: flex;
   color: #ff4062;
   font-size: 10px;
   line-height: 12px;
+  height: 25px;
 }
 
 .register__span {
   font-size: 10px;
   line-height: 12px;
   color: #a0a0a0;
+}
+
+.register__input_error {
+  color: #ff4062;
 }
 
 .register__input {

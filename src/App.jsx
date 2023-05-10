@@ -14,6 +14,7 @@ import { moviesApi } from './utils/MoviesApi';
 const App = () => {
   const [loading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
 
   const getMovies = () => {
     setIsLoading(true);
@@ -32,10 +33,10 @@ const App = () => {
 
   return (
     <>
-      <CurrentUserContext.Provider>
+      <CurrentUserContext.Provider value={currentUser}>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies movies={movies} />} />
+          <Route path='/movies' element={<Movies movies={movies} isLoading={loading} />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/register' element={<Register />} />
