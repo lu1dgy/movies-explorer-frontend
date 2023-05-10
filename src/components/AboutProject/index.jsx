@@ -1,5 +1,5 @@
-import React from 'react'
-import style from './AboutProject.module.css'
+import React from 'react';
+import style from './AboutProject.module.css';
 
 const AboutProject = () => {
   return (
@@ -10,13 +10,15 @@ const AboutProject = () => {
           <article className={style.aboutme__article}>
             <h3 className={style.aboutme__subheading}>Дипломный проект включал 5 этапов</h3>
             <p className={style.aboutme__text}>
-              Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.
+              Составление плана, работу над бэкендом, вёрстку, добавление функциональности и
+              финальные доработки.
             </p>
           </article>
           <article className={style.aboutme__article}>
             <h3 className={style.aboutme__subheading}>На выполнение диплома ушло 5 недель</h3>
             <p className={style.aboutme__text}>
-              У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.
+              У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы
+              успешно защититься.
             </p>
           </article>
         </div>
@@ -32,7 +34,7 @@ const AboutProject = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AboutProject
+export default AboutProject;
