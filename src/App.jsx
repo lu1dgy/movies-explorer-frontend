@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { CurrentUserContext } from './context/CurrentUserContext';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import Movies from './pages/Movies';
@@ -12,7 +13,8 @@ const App = () => {
 
   return (
     <>
-      <Routes>
+    <CurrentUserContext.Provider>
+    <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
@@ -21,6 +23,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+    </CurrentUserContext.Provider>
     </>
   );
 };
