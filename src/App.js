@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Main from './components/Main';
-import Movies from './components/Movies';
-import NotFound from './components/NotFound';
-import Profile from './components/Profile';
-import Register from './components/Register';
-import SavedMovies from './components/SavedMovies';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import Movies from './pages/Movies';
+import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
+import SavedMovies from './pages/SavedMovies';
 
 const App = () => {
 

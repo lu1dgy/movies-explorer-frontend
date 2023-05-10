@@ -1,9 +1,9 @@
 import React from 'react'
-import Footer from '../Footer'
-import MoviesCard from '../MoviesCard'
-import MoviesCardList from '../MoviesCardList'
-import SearchForm from '../SearchForm'
-import Header from '../Header'
+import Footer from '../../components/Footer'
+import MoviesCard from '../../components/MoviesCard'
+import MoviesCardList from '../../components/MoviesCardList'
+import SearchForm from '../../components/SearchForm'
+import Header from '../../components/Header'
 
 const SavedMovies = () => {
   const components = Array(2).fill(null)
