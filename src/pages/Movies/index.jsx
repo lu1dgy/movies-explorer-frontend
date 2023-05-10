@@ -1,27 +1,27 @@
-import React from 'react'
-import Footer from '../../components/Footer'
-import MoviesCard from '../../components/MoviesCard'
-import Header from '../../components/Header'
-import MoviesCardList from '../../components/MoviesCardList'
-import SearchForm from '../../components/SearchForm'
+import React from 'react';
+import Footer from '../../components/Footer';
+import MoviesCard from '../../components/MoviesCard';
+import Header from '../../components/Header';
+import MoviesCardList from '../../components/MoviesCardList';
+import SearchForm from '../../components/SearchForm';
 
-const Movies = () => {
-  const components = Array(15).fill(null)
+const Movies = ({ movies }) => {
+  console.log(movies);
+
   return (
     <>
       <Header />
       <main>
         <SearchForm />
         <MoviesCardList>
-          <MoviesCard isLiked={true} />
-          {components.map((e, i) => (
-            <MoviesCard key={i} />
+          {movies.map((e, i) => (
+            <MoviesCard key={i} {...e} />
           ))}
         </MoviesCardList>
       </main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Movies
+export default Movies;

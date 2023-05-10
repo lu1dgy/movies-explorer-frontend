@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { CurrentUserContext } from './context/CurrentUserContext';
@@ -20,17 +20,22 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => setMovies(data))
+      .catch((err) => console.log(err))
       .finally(() => {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   return (
     <>
       <CurrentUserContext.Provider>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies />} />
+          <Route path='/movies' element={<Movies movies={movies} />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/register' element={<Register />} />
