@@ -55,7 +55,7 @@ const Login = () => {
               <span className={`${style.login__error}`}>{errors.password || ''}</span>
             </label>
           </fieldset>
-          <button className={style.login__submit} type='submit'>
+          <button className={style.login__submit} type='submit' disabled={!isValid}>
             Войти
           </button>
           <div className={style.login__enter}>
