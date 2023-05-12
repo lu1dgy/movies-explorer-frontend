@@ -54,7 +54,7 @@ class MainApi {
     return MainApi._getResponse(response);
   }
 
-  async updateUserInfo({ name, email }) {
+  async updateUserInfo(name, email) {
     const response = await fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -98,7 +98,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  url: 'https://api.movies.lapkes.nomoredomains.monster',
+  url: 'http://localhost:3100',
+  // 'https://api.movies.lapkes.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
   },

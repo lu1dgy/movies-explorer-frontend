@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
 import { useValidationForm } from '../../utils/hooks/useValidationForm';
 
 import style from './Login.module.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, loggedIn }) => {
+  const navigate = useNavigate();
   const { values, handleChange, errors, isValid } = useValidationForm();
 
   const submitForm = (e) => {
     e.preventDefault();
     onLogin(values.email, values.password);
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate(-1);
+    }
+  }, [loggedIn, navigate]);
 
   return (
     <main className={style.login}>

@@ -14,9 +14,15 @@ const Movies = ({ movies, isLoading }) => {
       <Header />
       <main>
         <SearchForm />
-        <MoviesCardList>
-          {isLoading ? <Preloader /> : movies.map((e, i) => <MoviesCard key={i} {...e} />)}
-        </MoviesCardList>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList>
+            {movies.map((e, i) => (
+              <MoviesCard key={i} {...e} />
+            ))}
+          </MoviesCardList>
+        )}
       </main>
       <Footer />
     </>

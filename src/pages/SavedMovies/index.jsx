@@ -14,10 +14,16 @@ const SavedMovies = ({ isLoading }) => {
       <Header />
       <main>
         <SearchForm />
-        <MoviesCardList>
-          <MoviesCard isLiked={true} />
-          {isLoading ? <Preloader /> : components.map((e, i) => <MoviesCard key={i} />)}
-        </MoviesCardList>
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList>
+            <MoviesCard isLiked={true} />
+            {components.map((e, i) => (
+              <MoviesCard key={i} />
+            ))}
+          </MoviesCardList>
+        )}
       </main>
       <Footer />
     </>
