@@ -12,7 +12,7 @@ class MainApi {
     return res.json();
   }
 
-  async signIn({ email, password }) {
+  async signIn(email, password) {
     const response = await fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
@@ -23,7 +23,7 @@ class MainApi {
     return MainApi._getResponse(response);
   }
 
-  async signUp({ name, email, password }) {
+  async signUp(name, email, password) {
     const response = await fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
@@ -98,7 +98,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  url:'https://api.movies.lapkes.nomoredomains.monster',
+  url: 'https://api.movies.lapkes.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
   },
