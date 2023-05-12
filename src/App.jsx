@@ -12,6 +12,7 @@ import SavedMovies from './pages/SavedMovies';
 import { tabletCards } from './utils/constants';
 import { mobileCards } from './utils/constants';
 import { desktopCards } from './utils/constants';
+import ProtectedRoute from './utils/hoc/ProtectedRoute';
 import { mainApi } from './utils/MainApi';
 import { moviesApi } from './utils/MoviesApi';
 
@@ -24,12 +25,12 @@ const App = () => {
   const [slicedMoviesList, setSlicedMoviesList] = useState([]);
   const [filterMovies, setFilterMovies] = useState([]);
   const [emailName, setEmailName] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
-  const [isInfoTooltipOpen, setisInfoTooltipOpen] = useState(false);
+  const [isInfoTooltipOpen, setisInfoTooltipOpen] = useState();
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Проверяем токен
+  // Проверяем куки
   useEffect(() => {
     mainApi
       .getUser()
@@ -55,6 +56,7 @@ const App = () => {
         console.log(err);
       });
   };
+
   const handleRegister = (name, email, password) => {
     mainApi
       .signUp(name, email, password)
@@ -128,11 +130,29 @@ const App = () => {
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies movies={movies} isLoading={loading} />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
+          <Route
+            path='/movies'
+            element={
+              <ProtectedRoute
+                element={Movies}
+                movies={movies}
+                isLoading={loading}
+                loggedIn={loggedIn}
+              />
+            }
+          />
+          <Route
+            path='/saved-movies'
+            element={
+              <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} isLoading={loading} />
+            }
+          />
+          <Route
+            path='/profile'
+            element={<ProtectedRoute element={Profile} loggedIn={loggedIn} />}
+          />
+          <Route path='/register' element={<Register handleRegister={handleRegister} />} />
+          <Route path='/login' element={<Login onLogin={handleLogin} />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <InfoTooltip isOpen={isInfoTooltipOpen} status={isSuccess} onClose={closeToolTip} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../images/logo.svg';
@@ -6,11 +6,12 @@ import { useValidationForm } from '../../utils/hooks/useValidationForm';
 
 import style from './Login.module.css';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const { values, handleChange, errors, isValid } = useValidationForm();
 
   const submitForm = (e) => {
     e.preventDefault();
+    onLogin(values.email, values.password);
   };
 
   return (

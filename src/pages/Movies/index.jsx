@@ -4,8 +4,9 @@ import MoviesCard from '../../components/MoviesCard';
 import Header from '../../components/Header';
 import MoviesCardList from '../../components/MoviesCardList';
 import SearchForm from '../../components/SearchForm';
+import Preloader from '../../components/Preloader/Preloader';
 
-const Movies = ({ movies }) => {
+const Movies = ({ movies, isLoading }) => {
   console.log(movies);
 
   return (
@@ -14,9 +15,7 @@ const Movies = ({ movies }) => {
       <main>
         <SearchForm />
         <MoviesCardList>
-          {movies.map((e, i) => (
-            <MoviesCard key={i} {...e} />
-          ))}
+          {isLoading ? <Preloader /> : movies.map((e, i) => <MoviesCard key={i} {...e} />)}
         </MoviesCardList>
       </main>
       <Footer />

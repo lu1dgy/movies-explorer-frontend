@@ -5,14 +5,15 @@ import { useValidationForm } from '../../utils/hooks/useValidationForm';
 import logo from '../../images/logo.svg';
 
 import style from './Register.module.css';
-import { memo } from 'react';
 
-const Register = memo(() => {
+const Register = ({ handleRegister }) => {
   const { values, handleChange, errors, isValid } = useValidationForm();
 
   const submitForm = (e) => {
     e.preventDefault();
+    handleRegister(values.name, values.email, values.password);
   };
+
   return (
     <main className={style.register}>
       <div className={style.register__container}>
@@ -85,6 +86,6 @@ const Register = memo(() => {
       </div>
     </main>
   );
-});
+};
 
 export default Register;
