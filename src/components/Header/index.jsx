@@ -1,52 +1,45 @@
-import React, { useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
-import logo from '../../images/logo.svg'
-import account from '../../images/profile.svg'
+import logo from '../../images/logo.svg';
+import account from '../../images/profile.svg';
 
-import style from './Header.module.css'
+import style from './Header.module.css';
 
-const Header = () => {
-  const location = useLocation()
-  const [isOpened, setIsOpened] = useState(false)
-  const body = document.body
+const Header = ({ loggedIn }) => {
+  const location = useLocation();
+  const [isOpened, setIsOpened] = useState(false);
+  const body = document.body;
 
-  const backgroundColor = location.pathname === '/' ? '' : style.header_white
-  const isMainPage = location.pathname === '/'
+  const backgroundColor = location.pathname === '/' ? '' : style.header_white;
+  const isMainPage = location.pathname === '/';
 
   //предотвращаем скролл при открытом меню
   const setBodyOverflow = (opened) => {
     if (opened) {
-      body.style.overflow = ''
+      body.style.overflow = '';
     } else {
-      body.style.overflow = 'hidden'
+      body.style.overflow = 'hidden';
     }
-  }
+  };
 
   const handleBurgerClick = () => {
-    setIsOpened(!isOpened)
-    setBodyOverflow(isOpened)
-  }
+    setIsOpened(!isOpened);
+    setBodyOverflow(isOpened);
+  };
 
   return (
     <header className={`${style.header} ${backgroundColor}`}>
       <div className={style.header__container}>
         <Link to={'/'}>
-          <img
-            src={logo}
-            alt='logo'
-          />
+          <img src={logo} alt='logo' />
         </Link>
         {isMainPage ? (
           <div className={style.header__buttons}>
-            <Link
-              to={'/register'}
-              className={style.header__btn}>
+            <Link to={'/register'} className={style.header__btn}>
               Регистрация
             </Link>
-            <Link
-              to={'/login'}
-              className={style.header__btn + ' ' + style.header__active}>
+            <Link to={'/login'} className={style.header__btn + ' ' + style.header__active}>
               Войти
             </Link>
           </div>
@@ -58,7 +51,10 @@ const Header = () => {
                   <li className={style.header__item}>
                     <NavLink
                       to={'/'}
-                      className={(link) => (link.isActive ? style.header__link_active : style.header__link)}>
+                      className={(link) =>
+                        link.isActive ? style.header__link_active : style.header__link
+                      }
+                    >
                       Главная
                     </NavLink>
                   </li>
@@ -66,33 +62,34 @@ const Header = () => {
                 <li className={style.header__item}>
                   <NavLink
                     to={'/movies'}
-                    className={(link) => (link.isActive ? style.header__link_active : style.header__link)}>
+                    className={(link) =>
+                      link.isActive ? style.header__link_active : style.header__link
+                    }
+                  >
                     Фильмы
                   </NavLink>
                 </li>
                 <li className={style.header__item}>
                   <NavLink
-                    className={(link) => (link.isActive ? style.header__link_active : style.header__link)}
-                    to={'/saved-movies'}>
+                    className={(link) =>
+                      link.isActive ? style.header__link_active : style.header__link
+                    }
+                    to={'/saved-movies'}
+                  >
                     Сохранённые фильмы
                   </NavLink>
                 </li>
                 <li className={style.header__item}>
-                  <NavLink
-                    className={style.header__link}
-                    to='/profile'>
-                    <img
-                      className={style.header__account}
-                      src={account}
-                      alt={'profile'}
-                    />
+                  <NavLink className={style.header__link} to='/profile'>
+                    <img className={style.header__account} src={account} alt={'profile'} />
                   </NavLink>
                 </li>
               </ul>
             </nav>
             <button
               className={`${style.header__burger} ${isOpened && style.header__burger_active}`}
-              onClick={handleBurgerClick}>
+              onClick={handleBurgerClick}
+            >
               <div className={style.header__line}></div>
               <div className={style.header__line}></div>
               <div className={style.header__line}></div>
@@ -102,7 +99,7 @@ const Header = () => {
         )}
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

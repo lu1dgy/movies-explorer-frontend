@@ -1,19 +1,33 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import style from './MoviesCardList.module.css'
-const MoviesCardList = ({ children }) => {
-  const location = useLocation()
-
-  const hideButton = location.pathname === '/saved-movies' ? style.movies__more_hide : ''
-
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import style from './MoviesCardList.module.css';
+const MoviesCardList = ({
+  children,
+  onPagintaionClick,
+  isMoviesLeft,
+  isSearchError,
+  searchError,
+}) => {
+  const location = useLocation();
+  const onPagination = () => {
+    onPagintaionClick();
+  };
   return (
     <section className={style.movies}>
       <div className={style.movies__container}>
-        <ul className={style.movies__list}>{children}</ul>
-        <button className={style.movies__more + ' ' + hideButton}>Ещё</button>
+        {isSearchError ? (
+          <span className={style.movies__error}>{searchError}</span>
+        ) : (
+          <ul className={style.movies__list}>{children}</ul>
+        )}
+        {isMoviesLeft && location !== '/movies' ? (
+          <button className={style.movies__more} onClick={onPagination}>
+            Ещё
+          </button>
+        ) : null}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default MoviesCardList
+export default MoviesCardList;

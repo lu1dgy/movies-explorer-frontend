@@ -15,6 +15,12 @@
   position: relative;
 }
 
+.movies__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .movies__list {
   padding-top: 80px;
   border-top: 1px solid #e8e8e8;
@@ -23,7 +29,6 @@
   justify-content: center;
   max-width: 1140px;
   width: 100%;
-  max-height: 1163px;
   overflow: hidden;
   grid-template-columns: repeat(4, 1fr);
   gap: 38px 20px;
@@ -61,7 +66,6 @@
   }
 
   .movies__list {
-    max-height: 1236px;
     grid-template-columns: repeat(2, 339px);
     row-gap: 30px;
   }
@@ -79,7 +83,6 @@
 
   .movies__list {
     padding-top: 50px;
-    max-height: 1416px;
     grid-template-columns: repeat(1, 300px);
     row-gap: 34px;
   }

@@ -17,7 +17,7 @@ const Login = ({ onLogin, loggedIn }) => {
 
   useEffect(() => {
     if (loggedIn) {
-      navigate(-1);
+      navigate('/movies');
     }
   }, [loggedIn, navigate]);
 

@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
+import { useState } from 'react';
 import style from './MoviesCard.module.css';
 
-const MoviesCard = ({ isLiked, image, duration, nameEN }) => {
+const MoviesCard = (props) => {
+  const [liked, setLiked] = useState(props.isLiked);
   const handleCountTime = (data) => {
     const time = {
       hour: `${Math.floor(data / 60) ? Math.floor(data / 60) + ' ч.' : ''}`,
@@ -10,14 +12,33 @@ const MoviesCard = ({ isLiked, image, duration, nameEN }) => {
     return time;
   };
 
-  const memoTime = useMemo(() => handleCountTime(duration), [duration]);
+  const handleLike = async () => {
+    try {
+      if (props.isLiked) {
+        await props.deleteSavedMovie(props._id);
+        setLiked(false);
+      } else {
+        await props.addSavedMovie({
+          ...props,
+        });
+        setLiked(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const memoTime = useMemo(() => handleCountTime(props.duration), [props.duration]);
 
   return (
     <li className={style.movie}>
-      <img className={style.movie__img} src={image} alt='movieImg' />
+      <img className={style.movie__img} src={props.image} alt='movieImg' />
       <div className={style.movie__hood}>
-        <p className={style.movie__name}>{nameEN}</p>
-        <button className={`${style.movie__like} ${isLiked ? style.movie__like_active : ''}`} />
+        <p className={style.movie__name}>{props.nameEN}</p>
+        <button
+          className={`${style.movie__like} ${liked ? style.movie__like_active : ''}`}
+          onClick={handleLike}
+        />
       </div>
       <p className={style.movie__duration}>
         {memoTime.hour} {memoTime.minutes}

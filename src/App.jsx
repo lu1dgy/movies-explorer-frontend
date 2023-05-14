@@ -16,49 +16,57 @@ import { desktopCards } from './utils/constants';
 import ProtectedRoute from './utils/hoc/ProtectedRoute';
 import { mainApi } from './utils/MainApi';
 import { moviesApi } from './utils/MoviesApi';
+import {
+  checkboxStatusStorage,
+  filteredMoviesStorage,
+  moviesStorage,
+  searchRequestStorage,
+  valueFilteredMoviesStorage,
+} from './utils/storage';
 
 const App = () => {
   const navigate = useNavigate();
-  const [loading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const [loading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
-  const [slicedCardsCount, setSlicedCardsCount] = useState(16);
-  const [slicedMoviesList, setSlicedMoviesList] = useState([]);
-  const [filterMovies, setFilterMovies] = useState([]);
-  const [emailName, setEmailName] = useState('');
-  const [name, setName] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [errMessage, setErrorMessage] = useState('');
-
-  const [isInfoTooltipOpen, setisInfoTooltipOpen] = useState();
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState();
   const [isSuccess, setIsSuccess] = useState(false);
   const [appLoaded, setAppLoaded] = useState(false);
+  const [searchError, setSearchError] = useState('');
+  const [savedMoviesError, setSavedMoviesError] = useState('');
+  const [isSearchError, setIsSearchError] = useState(false);
+  const [isSavedError, setIsSavedError] = useState(false);
+  const [commonMovies, setCommonMovies] = useState([]);
+  const [slicedMovies, setSlicedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [userSavedMovies, setUserSavedMovies] = useState([]);
 
-  // Проверяем куки
-  useEffect(() => {
+  //функции данных пользователя
+  const getUser = () => {
     mainApi
       .getUser()
       .then((data) => {
-        setEmailName(data.email);
-        setName(data.name);
+        setCurrentUser(data);
         setLoggedIn(true);
       })
       .catch((err) => console.log(err))
       .finally(() => setAppLoaded(true));
-  }, [loggedIn]);
+  };
 
   const handleLogin = (email, password) => {
     mainApi
       .signIn(email, password)
       .then(() => {
-        setEmailName(email);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
+      .then(() => getUser())
       .catch((err) => {
         setIsSuccess(false);
         setErrorMessage(err.message);
-        setisInfoTooltipOpen(true);
+        setIsInfoTooltipOpen(true);
       });
   };
 
@@ -79,7 +87,7 @@ const App = () => {
         console.log(err);
       })
       .finally(() => {
-        setisInfoTooltipOpen(true);
+        setIsInfoTooltipOpen(true);
       });
   };
 
@@ -87,6 +95,7 @@ const App = () => {
     mainApi
       .logout()
       .then(() => {
+        clear();
         setLoggedIn(false);
         navigate('/', { replace: true });
       })
@@ -97,8 +106,7 @@ const App = () => {
     mainApi
       .updateUserInfo(name, email)
       .then((data) => {
-        setName(name);
-        setEmailName(email);
+        setCurrentUser({ name, email });
         setIsSuccess(true);
       })
       .catch((err) => {
@@ -107,112 +115,341 @@ const App = () => {
         console.log(err.message);
       })
       .finally(() => {
-        setisInfoTooltipOpen(true);
+        setIsInfoTooltipOpen(true);
       });
   };
 
-  const getMovies = () => {
+  //функции отвечающие за пагинацию
+  const handleWindowSize = () => {
+    const width = window.innerWidth;
+    if (width > 1279) {
+      return desktopCards;
+    }
+    if (width > 767) {
+      return tabletCards;
+    }
+    return mobileCards;
+  };
+
+  const pagination = () => {
+    const cardsMoreCount = handleWindowSize();
+    const cardsBefore = commonMovies.length;
+    const add = cardsMoreCount.pagination;
+    const cardsAfter = cardsBefore + add;
+    const newMovies = slicedMovies.slice(cardsBefore, cardsAfter);
+    setCommonMovies([...commonMovies, ...newMovies]);
+  };
+
+  const sliceArr = (arr) => {
+    const cardsCount = handleWindowSize();
+    if (arr.length > cardsCount.cards) {
+      const sliced = arr.slice(0, cardsCount.cards);
+      return sliced;
+    }
+    return arr;
+  };
+
+  // функции связанные с фильмами
+  const getMoviesApi = () => {
     setIsLoading(true);
-    moviesApi
+    return moviesApi
       .getMovies()
-      .then((data) => setMovies(data))
-      .catch((err) => console.log(err))
+      .then((movies) => {
+        setIsSearchError(false);
+        moviesStorage.set(movies);
+        return movies;
+      })
+      .catch((err) => {
+        setIsSearchError(true);
+        setSearchError('На сервере произошла ошибка, попробуйте еще раз');
+        console.log(err);
+      })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  const getSavedMovies = () => {
+    setIsLoading(true);
+    return mainApi
+      .getMyMovies()
+      .then((movies) => {
+        setIsSavedError(false);
+        const tmp = movies.map((movie) => {
+          return { ...movie, isLiked: true };
+        });
+        setSavedMovies(tmp);
+        setUserSavedMovies(tmp);
+      })
+      .catch((err) => {
+        setIsSavedError(true);
+        setSavedMoviesError('На сервере произошла ошибка, попробуйте еще раз');
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
-  const handleWindowSize = () => {
-    if (window.innerWidth > 1280) {
-      setSlicedCardsCount(desktopCards);
-    } else if (window.innerWidth < 1280 && window.innerWidth > 768) {
-      setSlicedCardsCount(tabletCards);
-    } else if (window.innerWidth <= 768) {
-      setSlicedCardsCount(mobileCards);
+  //фильтруем по вводу юзера
+  const valueFilter = (arr, inputText) => {
+    return arr.filter((movie) => {
+      const en = movie.nameEN.toLowerCase();
+      const ru = movie.nameRU.toLowerCase();
+      const params = inputText.toLowerCase();
+      const result = ru.includes(params) || en.includes(params);
+      return result;
+    });
+  };
+
+  //фильтруем по состоянию чекбокса
+  const durationFilter = (arr, isChecked) => {
+    return isChecked ? arr.filter((film) => film.duration <= 40) : arr;
+  };
+
+  // босс функция фильтраций
+  const moviesFilter = (movies, isChecked, inputValue) => {
+    if (movies) {
+      const filteredByInput = valueFilter(movies, inputValue);
+      valueFilteredMoviesStorage.set(filteredByInput);
+      const filteredByCheck = durationFilter(filteredByInput, isChecked);
+      return filteredByCheck;
+    }
+    return [];
+  };
+
+  const onCheckBoxToggle = async (isChecked) => {
+    checkboxStatusStorage.set(isChecked);
+    const movies = await valueFilteredMoviesStorage.get();
+    if (movies) {
+      const filteredByCheck = durationFilter(movies, !isChecked);
+      setSlicedMovies(filteredByCheck);
+      const sliced = sliceArr(filteredByCheck);
+      filteredMoviesStorage.set(sliced);
+      setCommonMovies(sliced);
     }
   };
 
-  const sliceMovies = (arr) => {
-    if (arr) {
-      const newArr = arr.slice(0, slicedCardsCount);
-      setSlicedMoviesList(newArr);
+  const toggleDuration = (isChecked) => {
+    const moviesToFilter = filteredMovies.length === 0 ? savedMovies : filteredMovies;
+    const filteredByCheck = durationFilter(moviesToFilter, isChecked);
+    setUserSavedMovies(filteredByCheck);
+  };
+
+  const searchMoviesApi = (isChecked, inputValue) => {
+    let movies = moviesStorage.get();
+    if (!movies) {
+      const films = getMoviesApi();
+      movies = films;
+    }
+    const filteredMovies = moviesFilter(movies, isChecked, inputValue);
+    filteredMoviesStorage.set(filteredMovies);
+    return filteredMovies;
+  };
+
+  const handleSearchSubmit = async (isChecked, inputValue) => {
+    setIsSearchError(false);
+    checkboxStatusStorage.set(isChecked);
+    searchRequestStorage.set(inputValue);
+    const movies = await searchMoviesApi(isChecked, inputValue);
+    setSlicedMovies(movies);
+    const films = sliceArr(movies);
+    if (films.length === 0) {
+      setIsSearchError(true);
+      setSearchError('Ничего не найдено');
+      return;
+    }
+    setCommonMovies(films);
+    return films;
+  };
+
+  const handleSaveSearchSubmit = (isChecked, inputValue) => {
+    setIsSavedError(false);
+    const filteredMovies = valueFilter(savedMovies, inputValue);
+    setFilteredMovies(filteredMovies);
+    const filteredByCheck = durationFilter(filteredMovies, isChecked);
+    setUserSavedMovies(filteredByCheck);
+    if (filteredByCheck.length === 0) {
+      setIsSavedError(true);
+      setSavedMoviesError('Ничего не найдено');
+      return;
     }
   };
 
-  const paginateMovies = () => {
-    const length = slicedMoviesList.length;
-    const newLength = slicedMoviesList.length + slicedCardsCount.more;
-    const newArr = filterMovies.slice(length, newLength);
-    setSlicedMoviesList([...slicedMoviesList, ...newArr]);
+  const addSavedMovie = (data) => {
+    return mainApi
+      .addMovie(data)
+      .then((saved) => {
+        setSavedMovies((movies) => [...movies, saved]);
+        setUserSavedMovies((movies) => [...movies, saved]);
+        setFilteredMovies((movies) => [...movies, saved]);
+        return saved;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteSavedMovie = (data) => {
+    mainApi
+      .deleteMovie(data)
+      .then(() => {
+        setUserSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
+        setFilteredMovies((movies) => movies.filter((movie) => movie._id !== data));
+        setSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const isLikedMovie = (arr) => {
+    return arr?.map((movie) => {
+      const liked = savedMovies.find((saved) => saved.movieId === movie.movieId);
+      return { ...movie, isLiked: liked ? true : false };
+    });
+  };
+
+  const isMoviesLeft = () =>
+    commonMovies.length !== slicedMovies.length && commonMovies.length !== 0;
+
+  const clear = () => {
+    localStorage.clear();
+    navigate('/');
+    setCommonMovies([]);
+    setUserSavedMovies([]);
+    setSlicedMovies([]);
+    setFilteredMovies([]);
+    setSavedMovies([]);
+    setCurrentUser(null);
+    setSearchError('');
+    setSavedMoviesError('');
+    setIsLoading(false);
+    setIsSearchError(false);
+    setLoggedIn(false);
+    setIsSavedError(false);
   };
 
   const closeToolTip = () => {
-    setisInfoTooltipOpen(false);
+    setIsInfoTooltipOpen(false);
   };
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowSize);
-
-    return () => {
-      window.removeEventListener('resize', handleWindowSize);
+    const fetchMovies = async () => {
+      setIsSearchError(false);
+      const movies = await getMoviesApi();
+      setSlicedMovies(movies);
+      const sliced = sliceArr(movies);
+      setCommonMovies(sliced);
     };
-  }, []);
+
+    const fetchSavedMovies = async () => {
+      if (loggedIn) {
+        setIsSavedError(false);
+        await getSavedMovies();
+      }
+    };
+
+    const updateFilteredMovies = () => {
+      setFilteredMovies(savedMovies);
+    };
+
+    const updateIsLikedMovies = () => {
+      if (savedMovies.length > 0) {
+        isLikedMovie(commonMovies);
+      }
+    };
+
+    const fetchStoredMovies = () => {
+      const films = filteredMoviesStorage.get();
+      if (films) {
+        setSlicedMovies(films);
+        const sliced = sliceArr(films);
+        setCommonMovies(sliced);
+        return;
+      }
+    };
+    fetchMovies();
+    getUser();
+
+    if (loggedIn) {
+      fetchSavedMovies();
+    }
+
+    updateIsLikedMovies();
+    updateFilteredMovies();
+    fetchStoredMovies();
+  }, [loggedIn, userSavedMovies.length]);
+
   return (
-    <>
-      <CurrentUserContext.Provider value={currentUser}>
-        {appLoaded ? (
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route
-              path='/movies'
-              element={
-                <ProtectedRoute
-                  element={Movies}
-                  movies={movies}
-                  isLoading={loading}
-                  loggedIn={loggedIn}
-                />
-              }
-            />
-            <Route
-              path='/saved-movies'
-              element={
-                <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} isLoading={loading} />
-              }
-            />
-            <Route
-              path='/profile'
-              element={
-                <ProtectedRoute
-                  element={Profile}
-                  loggedIn={loggedIn}
-                  name={name}
-                  onUpdate={updateUser}
-                  email={emailName}
-                  onExit={handleSignOut}
-                  setLoggedIn={setLoggedIn}
-                />
-              }
-            />
-            <Route path='/register' element={<Register handleRegister={handleRegister} />} />
-            <Route path='/login' element={<Login onLogin={handleLogin} loggedIn={loggedIn} />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        ) : (
-          <Preloader />
-        )}
-        <InfoTooltip
-          errMessage={errMessage}
-          isOpen={isInfoTooltipOpen}
-          status={isSuccess}
-          onClose={closeToolTip}
-        />
-      </CurrentUserContext.Provider>
-    </>
+    <CurrentUserContext.Provider value={currentUser}>
+      {appLoaded ? (
+        <Routes>
+          <Route path='/' element={<Main />} loggedIn={loggedIn} />
+          <Route
+            path='/movies'
+            element={
+              <ProtectedRoute
+                movies={isLikedMovie(commonMovies)}
+                element={Movies}
+                onPagintaionClick={pagination}
+                isMoviesLeft={isMoviesLeft}
+                isLoading={loading}
+                loggedIn={loggedIn}
+                addSavedMovie={addSavedMovie}
+                deleteSavedMovie={deleteSavedMovie}
+                onFormSubmit={handleSearchSubmit}
+                searchError={searchError}
+                isSearchError={isSearchError}
+                onCheckBoxToggle={onCheckBoxToggle}
+              />
+            }
+          />
+          <Route
+            path='/saved-movies'
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                movies={userSavedMovies}
+                loggedIn={loggedIn}
+                isLoading={loading}
+                deleteSavedMovie={deleteSavedMovie}
+                searchError={savedMoviesError}
+                isSearchError={isSavedError}
+                onFormSubmit={handleSaveSearchSubmit}
+                toggleDuration={toggleDuration}
+                moviesOnInit={savedMovies}
+              />
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                name={currentUser.name}
+                onUpdate={updateUser}
+                email={currentUser.email}
+                onExit={handleSignOut}
+                setLoggedIn={setLoggedIn}
+              />
+            }
+          />
+          <Route path='/register' element={<Register handleRegister={handleRegister} />} />
+          <Route path='/login' element={<Login onLogin={handleLogin} loggedIn={loggedIn} />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      ) : (
+        <Preloader />
+      )}
+      <InfoTooltip
+        errMessage={errMessage}
+        isOpen={isInfoTooltipOpen}
+        status={isSuccess}
+        onClose={closeToolTip}
+      />
+    </CurrentUserContext.Provider>
   );
 };
 
