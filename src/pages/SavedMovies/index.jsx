@@ -6,7 +6,6 @@ import SearchForm from '../../components/SearchForm';
 import Header from '../../components/Header';
 import Preloader from '../../components/Preloader/Preloader';
 import { checkboxStatusStorage, searchRequestStorage } from '../../utils/storage';
-import { useEffect } from 'react';
 
 const SavedMovies = ({
   isLoading,
@@ -39,8 +38,8 @@ const SavedMovies = ({
   };
 
   const handleCheck = () => {
-    toggleDuration(!checkBoxStatus);
     setCheckBoxStatus((prevCheckBoxStatus) => !prevCheckBoxStatus);
+    toggleDuration(!checkBoxStatus);
     setIsDisabled(true);
     setTimeout(() => {
       setIsDisabled(false);

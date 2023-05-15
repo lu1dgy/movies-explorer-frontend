@@ -42,6 +42,7 @@ const App = () => {
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [userSavedMovies, setUserSavedMovies] = useState([]);
+  const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);
 
   //функции данных пользователя
   const getUser = () => {
@@ -178,7 +179,6 @@ const App = () => {
         const tmp = movies.map((movie) => {
           return { ...movie, isLiked: true };
         });
-        debugger;
         setSavedMovies(tmp);
         setUserSavedMovies(tmp);
       })
@@ -221,7 +221,9 @@ const App = () => {
 
   const onCheckBoxToggle = async (isChecked) => {
     checkboxStatusStorage.set(!isChecked);
+    setCheckBoxStatus((el) => !el);
     const movies = await valueFilteredMoviesStorage.get();
+    debugger;
     if (movies) {
       const filteredByCheck = durationFilter(movies, !isChecked);
       setSlicedMovies(filteredByCheck);
@@ -259,6 +261,7 @@ const App = () => {
     if (films.length === 0) {
       setIsSearchError(true);
       setSearchError('Ничего не найдено');
+      valueFilteredMoviesStorage.remove();
       return;
     }
     setCommonMovies(films);
@@ -273,7 +276,6 @@ const App = () => {
     const filteredMovies = valueFilter(savedMovies, inputValue);
     setFilteredMovies(filteredMovies);
     const filteredByCheck = durationFilter(filteredMovies, isChecked);
-    debugger;
     setUserSavedMovies(filteredByCheck);
     if (filteredByCheck.length === 0) {
       setIsSavedError(true);
@@ -380,13 +382,12 @@ const App = () => {
 
     if (loggedIn) {
       fetchSavedMovies();
-      debugger;
     }
 
     updateIsLikedMovies();
     updateFilteredMovies();
     fetchStoredMovies();
-  }, [loggedIn]);
+  }, [loggedIn, checkBoxStatus]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
