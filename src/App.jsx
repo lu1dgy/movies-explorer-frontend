@@ -223,7 +223,6 @@ const App = () => {
     checkboxStatusStorage.set(!isChecked);
     setCheckBoxStatus((el) => !el);
     const movies = await valueFilteredMoviesStorage.get();
-    debugger;
     if (movies) {
       const filteredByCheck = durationFilter(movies, !isChecked);
       setSlicedMovies(filteredByCheck);
