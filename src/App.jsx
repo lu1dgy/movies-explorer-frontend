@@ -219,7 +219,7 @@ const App = () => {
   };
 
   const onCheckBoxToggle = async (isChecked) => {
-    checkboxStatusStorage.set(isChecked);
+    checkboxStatusStorage.set(!isChecked);
     const movies = await valueFilteredMoviesStorage.get();
     if (movies) {
       const filteredByCheck = durationFilter(movies, !isChecked);
@@ -310,9 +310,6 @@ const App = () => {
     });
   };
 
-  const isMoviesLeft = () =>
-    commonMovies.length !== slicedMovies.length && commonMovies.length !== 0;
-
   const clear = () => {
     localStorage.clear();
     navigate('/');
@@ -336,10 +333,12 @@ const App = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      const chekcboxStatus = checkboxStatusStorage.get();
       setIsSearchError(false);
       const movies = await getMoviesApi();
-      setSlicedMovies(movies);
-      const sliced = sliceArr(movies);
+      const sortMovies = durationFilter(movies, chekcboxStatus);
+      setSlicedMovies(sortMovies);
+      const sliced = sliceArr(sortMovies);
       setCommonMovies(sliced);
     };
 
@@ -393,7 +392,9 @@ const App = () => {
                 movies={isLikedMovie(commonMovies)}
                 element={Movies}
                 onPagintaionClick={pagination}
-                isMoviesLeft={isMoviesLeft}
+                isMoviesLeft={
+                  commonMovies.length !== slicedMovies.length && commonMovies.length !== 0
+                }
                 isLoading={loading}
                 loggedIn={loggedIn}
                 addSavedMovie={addSavedMovie}

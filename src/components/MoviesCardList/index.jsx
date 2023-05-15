@@ -8,7 +8,6 @@ const MoviesCardList = ({
   isSearchError,
   searchError,
 }) => {
-  const location = useLocation();
   const onPagination = () => {
     onPagintaionClick();
   };
@@ -20,7 +19,7 @@ const MoviesCardList = ({
         ) : (
           <ul className={style.movies__list}>{children}</ul>
         )}
-        {isMoviesLeft && location !== '/movies' ? (
+        {isMoviesLeft && !isSearchError ? (
           <button className={style.movies__more} onClick={onPagination}>
             Ещё
           </button>

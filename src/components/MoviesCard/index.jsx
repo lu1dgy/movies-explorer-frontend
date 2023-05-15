@@ -15,11 +15,22 @@ const MoviesCard = (props) => {
   const handleLike = async () => {
     try {
       if (props.isLiked) {
+        debugger;
         await props.deleteSavedMovie(props._id);
         setLiked(false);
       } else {
         await props.addSavedMovie({
-          ...props,
+          nameEN: props?.nameEN,
+          nameRU: props?.nameRU,
+          country: props?.country,
+          duration: props?.duration,
+          year: props?.year,
+          image: props?.image,
+          trailerLink: props?.trailerLink,
+          description: props?.description,
+          director: props?.director,
+          thumbnail: props?.thumbnail,
+          movieId: props?.movieId,
         });
         setLiked(true);
       }

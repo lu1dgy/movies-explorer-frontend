@@ -44,7 +44,7 @@ const Movies = ({
 
   const handleCheck = () => {
     setCheckBoxStatus((prevCheckBoxStatus) => !prevCheckBoxStatus);
-    onCheckBoxToggle(!checkBoxStatus);
+    onCheckBoxToggle(checkBoxStatus);
     setIsDisabled(true);
     setTimeout(() => {
       setIsDisabled(false);
