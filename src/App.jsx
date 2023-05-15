@@ -313,8 +313,12 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const liked = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
-      return { ...movie, isLiked: liked ? true : false };
+      const savedMovie = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
+      if (savedMovie) {
+        return { ...movie, isLiked: true, _id: savedMovie._id };
+      } else {
+        return { ...movie, isLiked: false, _id: null };
+      }
     });
   };
 
