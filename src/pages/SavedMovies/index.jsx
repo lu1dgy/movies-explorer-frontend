@@ -6,8 +6,7 @@ import SearchForm from '../../components/SearchForm';
 import Header from '../../components/Header';
 import Preloader from '../../components/Preloader/Preloader';
 import { checkboxStatusStorage, searchRequestStorage } from '../../utils/storage';
-
-import style from './SavedMovies.module.css';
+import { useEffect } from 'react';
 
 const SavedMovies = ({
   isLoading,
@@ -40,8 +39,8 @@ const SavedMovies = ({
   };
 
   const handleCheck = () => {
-    setCheckBoxStatus((prevCheckBoxStatus) => !prevCheckBoxStatus);
     toggleDuration(!checkBoxStatus);
+    setCheckBoxStatus((prevCheckBoxStatus) => !prevCheckBoxStatus);
     setIsDisabled(true);
     setTimeout(() => {
       setIsDisabled(false);
@@ -63,8 +62,6 @@ const SavedMovies = ({
         />
         {isLoading ? (
           <Preloader />
-        ) : movies ? (
-          <span className={style.saved__error}>Вы не сохранили ни одного фильма</span>
         ) : (
           <MoviesCardList searchError={searchError} isSearchError={isSearchError}>
             {movies.map((movie, i) => (

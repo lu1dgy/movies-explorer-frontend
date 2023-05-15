@@ -178,6 +178,7 @@ const App = () => {
         const tmp = movies.map((movie) => {
           return { ...movie, isLiked: true };
         });
+        debugger;
         setSavedMovies(tmp);
         setUserSavedMovies(tmp);
       })
@@ -228,6 +229,7 @@ const App = () => {
       filteredMoviesStorage.set(sliced);
       setCommonMovies(sliced);
     }
+    return;
   };
 
   const toggleDuration = (isChecked) => {
@@ -260,6 +262,9 @@ const App = () => {
       return;
     }
     setCommonMovies(films);
+    searchRequestStorage.remove();
+    valueFilteredMoviesStorage.remove();
+
     return films;
   };
 
@@ -268,6 +273,7 @@ const App = () => {
     const filteredMovies = valueFilter(savedMovies, inputValue);
     setFilteredMovies(filteredMovies);
     const filteredByCheck = durationFilter(filteredMovies, isChecked);
+    debugger;
     setUserSavedMovies(filteredByCheck);
     if (filteredByCheck.length === 0) {
       setIsSavedError(true);
@@ -305,7 +311,7 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const liked = savedMovies.find((saved) => saved.movieId === movie.movieId);
+      const liked = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
       return { ...movie, isLiked: liked ? true : false };
     });
   };
@@ -345,6 +351,7 @@ const App = () => {
     const fetchSavedMovies = async () => {
       if (loggedIn) {
         setIsSavedError(false);
+        filteredMoviesStorage.remove();
         await getSavedMovies();
       }
     };
@@ -373,12 +380,13 @@ const App = () => {
 
     if (loggedIn) {
       fetchSavedMovies();
+      debugger;
     }
 
     updateIsLikedMovies();
     updateFilteredMovies();
     fetchStoredMovies();
-  }, [loggedIn, userSavedMovies.length]);
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -418,6 +426,7 @@ const App = () => {
                 searchError={savedMoviesError}
                 isSearchError={isSavedError}
                 onFormSubmit={handleSaveSearchSubmit}
+                savedMovies={savedMovies}
                 toggleDuration={toggleDuration}
                 moviesOnInit={savedMovies}
               />
