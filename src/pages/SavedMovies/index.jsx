@@ -7,6 +7,8 @@ import Header from '../../components/Header';
 import Preloader from '../../components/Preloader/Preloader';
 import { checkboxStatusStorage, searchRequestStorage } from '../../utils/storage';
 
+import style from './SavedMovies.module.css';
+
 const SavedMovies = ({
   isLoading,
   movies,
@@ -61,6 +63,8 @@ const SavedMovies = ({
         />
         {isLoading ? (
           <Preloader />
+        ) : movies ? (
+          <span className={style.saved__error}>Вы не сохранили ни одного фильма</span>
         ) : (
           <MoviesCardList searchError={searchError} isSearchError={isSearchError}>
             {movies.map((movie, i) => (
