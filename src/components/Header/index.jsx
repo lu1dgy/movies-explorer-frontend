@@ -6,7 +6,7 @@ import account from '../../images/profile.svg';
 
 import style from './Header.module.css';
 
-const Header = ({ loggedIn }) => {
+const Header = () => {
   const location = useLocation();
   const [isOpened, setIsOpened] = useState(false);
   const body = document.body;
@@ -25,6 +25,11 @@ const Header = ({ loggedIn }) => {
 
   const handleBurgerClick = () => {
     setIsOpened(!isOpened);
+    setBodyOverflow(isOpened);
+  };
+
+  const handleClick = () => {
+    setIsOpened(false);
     setBodyOverflow(isOpened);
   };
 
@@ -48,7 +53,7 @@ const Header = ({ loggedIn }) => {
             <nav className={style.header__menu}>
               <ul className={`${style.header__list} ${isOpened ? style.header__list_active : ''}`}>
                 {isOpened && (
-                  <li className={style.header__item}>
+                  <li className={style.header__item} onClick={handleClick}>
                     <NavLink
                       to={'/'}
                       className={(link) =>
@@ -59,7 +64,7 @@ const Header = ({ loggedIn }) => {
                     </NavLink>
                   </li>
                 )}
-                <li className={style.header__item}>
+                <li className={style.header__item} onClick={handleClick}>
                   <NavLink
                     to={'/movies'}
                     className={(link) =>
@@ -69,7 +74,7 @@ const Header = ({ loggedIn }) => {
                     Фильмы
                   </NavLink>
                 </li>
-                <li className={style.header__item}>
+                <li className={style.header__item} onClick={handleClick}>
                   <NavLink
                     className={(link) =>
                       link.isActive ? style.header__link_active : style.header__link
@@ -79,7 +84,7 @@ const Header = ({ loggedIn }) => {
                     Сохранённые фильмы
                   </NavLink>
                 </li>
-                <li className={style.header__item}>
+                <li className={style.header__item} onClick={handleClick}>
                   <NavLink className={style.header__link} to='/profile'>
                     <img className={style.header__account} src={account} alt={'profile'} />
                   </NavLink>
@@ -94,7 +99,7 @@ const Header = ({ loggedIn }) => {
               <div className={style.header__line}></div>
               <div className={style.header__line}></div>
             </button>
-            <div className={isOpened ? style.header__overlay : ''}></div>
+            {isOpened && <div className={style.header__overlay} onClick={handleClick}></div>}
           </>
         )}
       </div>
