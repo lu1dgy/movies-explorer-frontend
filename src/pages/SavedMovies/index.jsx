@@ -17,8 +17,6 @@ const SavedMovies = ({
   searchError,
   isSearchError,
 }) => {
-  console.log(movies);
-
   const [searchValue, setSearchValue] = useState(searchRequestStorage.get() || '');
   const [errorMessage, setErrorMessage] = useState('');
   const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);

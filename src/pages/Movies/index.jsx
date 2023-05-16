@@ -21,8 +21,6 @@ const Movies = ({
   isSearchError,
   loggedIn,
 }) => {
-  console.log(movies);
-
   const [searchValue, setSearchValue] = useState(searchRequestStorage.get() || '');
   const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);
   const [isDisabled, setIsDisabled] = useState(false);
