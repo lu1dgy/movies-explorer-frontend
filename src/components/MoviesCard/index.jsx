@@ -42,7 +42,9 @@ const MoviesCard = (props) => {
 
   return (
     <li className={style.movie}>
-      <img className={style.movie__img} src={props.image} alt='movieImg' />
+      <a href={props?.trailerLink}>
+        <img className={style.movie__img} src={props.image} alt='movieImg' />
+      </a>
       <div className={style.movie__hood}>
         <p className={style.movie__name}>{props.nameEN}</p>
         <button

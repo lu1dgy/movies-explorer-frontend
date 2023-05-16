@@ -96,9 +96,9 @@ const App = () => {
     mainApi
       .logout()
       .then(() => {
-        clear();
-        setLoggedIn(false);
         navigate('/', { replace: true });
+        setLoggedIn(false);
+        clear();
       })
       .catch((err) => console.log(err));
   };
@@ -329,7 +329,7 @@ const App = () => {
     setSlicedMovies([]);
     setFilteredMovies([]);
     setSavedMovies([]);
-    setCurrentUser(null);
+    setCurrentUser({});
     setSearchError('');
     setSavedMoviesError('');
     setIsLoading(false);
