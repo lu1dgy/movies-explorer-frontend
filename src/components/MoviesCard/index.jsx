@@ -42,7 +42,7 @@ const MoviesCard = (props) => {
 
   return (
     <li className={style.movie}>
-      <a href={props?.trailerLink}>
+      <a href={props?.trailerLink} target='_blank' rel='noreferrer'>
         <img className={style.movie__img} src={props.image} alt='movieImg' />
       </a>
       <div className={style.movie__hood}>
