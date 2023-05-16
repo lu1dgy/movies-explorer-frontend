@@ -96,7 +96,6 @@ const App = () => {
     mainApi
       .logout()
       .then(() => {
-        debugger;
         navigate('/', { replace: true });
         setLoggedIn(false);
         clear();
