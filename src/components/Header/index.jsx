@@ -29,8 +29,10 @@ const Header = () => {
   };
 
   const handleClick = () => {
-    setIsOpened(false);
-    setBodyOverflow(isOpened);
+    if (isOpened) {
+      setIsOpened(false);
+      setBodyOverflow(isOpened);
+    }
   };
 
   return (
