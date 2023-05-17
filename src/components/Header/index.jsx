@@ -6,13 +6,12 @@ import account from '../../images/profile.svg';
 
 import style from './Header.module.css';
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
   const location = useLocation();
   const [isOpened, setIsOpened] = useState(false);
   const body = document.body;
 
   const backgroundColor = location.pathname === '/' ? '' : style.header_white;
-  const isMainPage = location.pathname === '/';
 
   //предотвращаем скролл при открытом меню
   const setBodyOverflow = (opened) => {
@@ -41,7 +40,7 @@ const Header = () => {
         <Link to={'/'}>
           <img src={logo} alt='logo' />
         </Link>
-        {isMainPage ? (
+        {!loggedIn && location.pathname === '/' ? (
           <div className={style.header__buttons}>
             <Link to={'/register'} className={style.header__btn}>
               Регистрация

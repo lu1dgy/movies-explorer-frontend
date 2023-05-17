@@ -74,13 +74,15 @@ const App = () => {
   const handleRegister = (name, email, password) => {
     mainApi
       .signUp(name, email, password)
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          setLoggedIn(true);
-          navigate('/movies', { replace: true });
-          setIsSuccess(true);
-        }
+      .then((user) => {
+        mainApi.signIn(user.email, password).then((data) => {
+          if (data) {
+            setCurrentUser(data);
+            setLoggedIn(true);
+            navigate('/movies', { replace: true });
+            setIsSuccess(true);
+          }
+        });
       })
       .catch((err) => {
         setErrorMessage(err.message);
@@ -396,7 +398,7 @@ const App = () => {
     <CurrentUserContext.Provider value={currentUser}>
       {appLoaded ? (
         <Routes>
-          <Route path='/' element={<Main />} loggedIn={loggedIn} />
+          <Route path='/' element={<Main loggedIn={loggedIn} />} />
           <Route
             path='/movies'
             element={

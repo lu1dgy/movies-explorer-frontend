@@ -29,7 +29,7 @@ const SavedMovies = ({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!searchValue) {
-      setErrorMessage('Введите фильм который ищете');
+      setErrorMessage('Нужно ввести ключевое слово');
       return;
     }
     onFormSubmit(checkBoxStatus, searchValue);
