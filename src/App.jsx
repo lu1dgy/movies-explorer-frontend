@@ -175,6 +175,7 @@ const App = () => {
 
   const getSavedMovies = () => {
     setIsLoading(true);
+    if (!loggedIn) return;
     return mainApi
       .getMyMovies()
       .then((movies) => {
