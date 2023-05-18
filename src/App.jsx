@@ -447,6 +447,7 @@ const App = () => {
                 name={currentUser.name}
                 onUpdate={updateUser}
                 email={currentUser.email}
+                setCurrentUser={setCurrentUser}
                 onExit={handleSignOut}
                 setLoggedIn={setLoggedIn}
               />

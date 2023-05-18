@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Header from '../../components/Header';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
 import style from './Profile.module.css';
 
-const Profile = ({ name, email, onExit, onUpdate }) => {
+const Profile = ({ name, email, onExit, onUpdate, setCurrentUser }) => {
+  const currentUser = React.useContext(CurrentUserContext);
   const [formValue, setFormValue] = useState({
     email,
     name,
   });
+
   const [isEditing, setIsEditing] = useState(false);
 
   const handleChange = (e) => {
@@ -17,9 +20,20 @@ const Profile = ({ name, email, onExit, onUpdate }) => {
     });
   };
 
-  const onUpdateUser = () => {
-    onUpdate(formValue.name, formValue.email);
-    setIsEditing(false);
+  const onUpdateUser = (e) => {
+    if (currentUser.name === formValue.name && currentUser.email === formValue.email) {
+      e.preventDefault();
+      return;
+    } else {
+      setCurrentUser(formValue.name, formValue.email);
+      onUpdate(formValue.name, formValue.email);
+      setIsEditing(false);
+    }
+  };
+
+  const handleExit = (e) => {
+    e.preventDefault();
+    onExit();
   };
 
   return (
@@ -73,7 +87,7 @@ const Profile = ({ name, email, onExit, onUpdate }) => {
                   Сохранить
                 </button>
               )}
-              <button className={style.profile__exit} type='button' onClick={onExit}>
+              <button className={style.profile__exit} type='button' onClick={handleExit}>
                 Выйти из аккаунта
               </button>
             </div>
