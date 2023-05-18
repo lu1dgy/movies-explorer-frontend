@@ -22,7 +22,7 @@ const SearchForm = ({
             value={searchValue}
             onChange={handleInputChange}
           />
-          <button className={style.form__submit} type='submit'>
+          <button className={style.form__submit} type='submit' disabled={isDisabled}>
             Найти
           </button>
         </fieldset>
