@@ -39,7 +39,6 @@ const Movies = ({
       return;
     }
     onFormSubmit(checkBoxStatus, searchValue);
-    searchRequestStorage.remove();
   };
 
   const handleCheck = () => {
