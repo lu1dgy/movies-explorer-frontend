@@ -23,7 +23,9 @@ const moviesStorage = new DataStorage('movies');
 const valueFilteredMoviesStorage = new DataStorage('valueFiltered');
 const filteredMoviesStorage = new DataStorage('filteredMoviesStorage');
 const searchRequestStorage = new DataStorage('searchInput');
+const searchSavedRequestStorage = new DataStorage('searchSavedRequestStorage');
 const checkboxStatusStorage = new DataStorage('checkboxStatus');
+const checkboxSavedStatusStorage = new DataStorage('checkboxSavedStatusStorage');
 
 export {
   moviesStorage,
@@ -31,4 +33,6 @@ export {
   checkboxStatusStorage,
   valueFilteredMoviesStorage,
   filteredMoviesStorage,
+  checkboxSavedStatusStorage,
+  searchSavedRequestStorage,
 };

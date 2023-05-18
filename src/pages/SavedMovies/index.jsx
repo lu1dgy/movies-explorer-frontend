@@ -5,7 +5,7 @@ import MoviesCardList from '../../components/MoviesCardList';
 import SearchForm from '../../components/SearchForm';
 import Header from '../../components/Header';
 import Preloader from '../../components/Preloader/Preloader';
-import { checkboxStatusStorage, searchRequestStorage } from '../../utils/storage';
+import { checkboxSavedStatusStorage, searchSavedRequestStorage } from '../../utils/storage';
 
 const SavedMovies = ({
   isLoading,
@@ -16,11 +16,13 @@ const SavedMovies = ({
   toggleDuration,
   searchError,
   isSearchError,
+  moviesOnInit,
 }) => {
-  const [searchValue, setSearchValue] = useState(searchRequestStorage.get() || '');
+  const [searchValue, setSearchValue] = useState(searchSavedRequestStorage.get() || '');
   const [errorMessage, setErrorMessage] = useState('');
-  const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);
+  const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxSavedStatusStorage.get() || false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [moviesList, setMoviesList] = useState(moviesOnInit);
   const handleInputChange = (e) => {
     if (!searchValue) setErrorMessage('');
     setSearchValue(e.target.value);
@@ -32,8 +34,9 @@ const SavedMovies = ({
       setErrorMessage('Нужно ввести ключевое слово');
       return;
     }
+    searchSavedRequestStorage.set(searchValue);
+    checkboxSavedStatusStorage.set(checkBoxStatus);
     onFormSubmit(checkBoxStatus, searchValue);
-    searchRequestStorage.remove();
   };
 
   const handleCheck = () => {
@@ -44,6 +47,10 @@ const SavedMovies = ({
       setIsDisabled(false);
     }, 250);
   };
+
+  React.useEffect(() => {
+    setMoviesList(movies);
+  }, [movies]);
 
   return (
     <>
@@ -62,7 +69,7 @@ const SavedMovies = ({
           <Preloader />
         ) : (
           <MoviesCardList searchError={searchError} isSearchError={isSearchError}>
-            {movies.map((movie, i) => (
+            {moviesList.map((movie, i) => (
               <MoviesCard
                 key={movie.movieId}
                 {...movie}

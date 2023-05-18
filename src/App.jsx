@@ -40,6 +40,7 @@ const App = () => {
   const [commonMovies, setCommonMovies] = useState([]);
   const [slicedMovies, setSlicedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [initialSavedMovies, setInitialSavedMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [userSavedMovies, setUserSavedMovies] = useState([]);
   const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);
@@ -182,6 +183,7 @@ const App = () => {
           return { ...movie, isLiked: true };
         });
         setSavedMovies(tmp);
+        setInitialSavedMovies(tmp);
         setUserSavedMovies(tmp);
       })
       .catch((err) => {
@@ -328,6 +330,7 @@ const App = () => {
     navigate('/');
     setCommonMovies([]);
     setUserSavedMovies([]);
+    setInitialSavedMovies([]);
     setSlicedMovies([]);
     setFilteredMovies([]);
     setSavedMovies([]);
@@ -433,8 +436,8 @@ const App = () => {
                 isSearchError={isSavedError}
                 onFormSubmit={handleSaveSearchSubmit}
                 savedMovies={savedMovies}
+                moviesOnInit={initialSavedMovies}
                 toggleDuration={toggleDuration}
-                moviesOnInit={savedMovies}
               />
             }
           />
