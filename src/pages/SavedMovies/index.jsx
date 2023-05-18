@@ -68,6 +68,7 @@ const SavedMovies = ({
                 {...movie}
                 loggedIn={loggedIn}
                 deleteSavedMovie={deleteSavedMovie}
+                isSavedMovies={true}
               />
             ))}
           </MoviesCardList>

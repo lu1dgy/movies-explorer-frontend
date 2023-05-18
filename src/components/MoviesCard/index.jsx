@@ -48,7 +48,9 @@ const MoviesCard = (props) => {
       <div className={style.movie__hood}>
         <p className={style.movie__name}>{props.nameEN}</p>
         <button
-          className={`${style.movie__like} ${liked ? style.movie__like_active : ''}`}
+          className={`${style.movie__like} ${
+            props.isSavedMovies ? style.movie__delete : liked ? style.movie__like_active : ''
+          }`}
           onClick={handleLike}
         />
       </div>
