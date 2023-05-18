@@ -316,7 +316,7 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const savedMovie = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
+      const savedMovie = initialSavedMovies.find((saved) => saved.movieId === movie.movieId);
       if (savedMovie) {
         return { ...movie, isLiked: true, _id: savedMovie._id };
       } else {
