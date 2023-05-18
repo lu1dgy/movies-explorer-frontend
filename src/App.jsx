@@ -156,6 +156,7 @@ const App = () => {
   // функции связанные с фильмами
   const getMoviesApi = () => {
     setIsLoading(true);
+    if (!loggedIn) return;
     return moviesApi
       .getMovies()
       .then((movies) => {
@@ -175,7 +176,6 @@ const App = () => {
 
   const getSavedMovies = () => {
     setIsLoading(true);
-    if (!loggedIn) return;
     return mainApi
       .getMyMovies()
       .then((movies) => {
@@ -352,7 +352,7 @@ const App = () => {
     const fetchMovies = async () => {
       const chekcboxStatus = checkboxStatusStorage.get();
       setIsSearchError(false);
-      const movies = await getMoviesApi();
+      const movies = (await getMoviesApi()) || [];
       const sortMovies = durationFilter(movies, chekcboxStatus);
       setSlicedMovies(sortMovies);
       const sliced = sliceArr(sortMovies);
