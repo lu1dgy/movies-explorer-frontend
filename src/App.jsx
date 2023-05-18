@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import SavedMovies from './pages/SavedMovies';
-import { tabletCards } from './utils/constants';
+import { shortFilmDuration, tabletCards } from './utils/constants';
 import { mobileCards } from './utils/constants';
 import { desktopCards } from './utils/constants';
 import ProtectedRoute from './utils/hoc/ProtectedRoute';
@@ -207,7 +207,7 @@ const App = () => {
 
   //фильтруем по состоянию чекбокса
   const durationFilter = (arr, isChecked) => {
-    return isChecked ? arr.filter((film) => film.duration <= 40) : arr;
+    return isChecked ? arr.filter((film) => film.duration <= shortFilmDuration) : arr;
   };
 
   // босс функция фильтраций
