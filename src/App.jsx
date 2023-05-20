@@ -223,7 +223,6 @@ const App = () => {
   };
 
   const onCheckBoxToggle = async (isChecked) => {
-    checkboxStatusStorage.set(!isChecked);
     setCheckBoxStatus((el) => !el);
     const movies = await valueFilteredMoviesStorage.get();
     if (movies) {
@@ -267,7 +266,6 @@ const App = () => {
       return;
     }
     setCommonMovies(films);
-    searchRequestStorage.remove();
     valueFilteredMoviesStorage.remove();
 
     return films;
@@ -347,10 +345,10 @@ const App = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const chekcboxStatus = checkboxStatusStorage.get();
+      const checkboxStatus = checkboxStatusStorage.get();
       setIsSearchError(false);
       const movies = (await getMoviesApi()) || [];
-      const sortMovies = durationFilter(movies, chekcboxStatus);
+      const sortMovies = durationFilter(movies, checkboxStatus);
       setSlicedMovies(sortMovies);
       const sliced = sliceArr(sortMovies);
       setCommonMovies(sliced);
@@ -359,7 +357,6 @@ const App = () => {
     const fetchSavedMovies = async () => {
       if (loggedIn) {
         setIsSavedError(false);
-        filteredMoviesStorage.remove();
         await getSavedMovies();
       }
     };
@@ -383,7 +380,13 @@ const App = () => {
         return;
       }
     };
-    fetchMovies();
+
+    if (filteredMoviesStorage.get().length > 0) {
+      fetchStoredMovies();
+    } else {
+      fetchMovies();
+    }
+
     getUser();
 
     if (loggedIn) {
@@ -392,7 +395,6 @@ const App = () => {
 
     updateIsLikedMovies();
     updateFilteredMovies();
-    fetchStoredMovies();
   }, [loggedIn, checkBoxStatus]);
 
   return (
