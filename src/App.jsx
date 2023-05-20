@@ -287,7 +287,6 @@ const App = () => {
   };
 
   const addSavedMovie = (data) => {
-    debugger;
     return mainApi
       .addMovie(data)
       .then((saved) => {
@@ -302,7 +301,6 @@ const App = () => {
   };
 
   const deleteSavedMovie = (data) => {
-    debugger;
     mainApi
       .deleteMovie(data)
       .then(() => {
@@ -317,7 +315,7 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const savedMovie = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
+      const savedMovie = savedMovies.find((saved) => saved.movieId === movie.movieId);
       if (savedMovie) {
         return { ...movie, isLiked: true, _id: savedMovie._id };
       } else {

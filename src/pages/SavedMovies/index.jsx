@@ -46,9 +46,9 @@ const SavedMovies = ({
     }, 250);
   };
 
-  // useEffect(() => {
-  //   setMoviesList(movies);
-  // }, [movies]);
+  useEffect(() => {
+    setMoviesList(movies);
+  }, [movies]);
 
   useEffect(() => {
     setMoviesList(moviesOnInit);
