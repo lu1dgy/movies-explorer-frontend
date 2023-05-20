@@ -5,7 +5,6 @@ import MoviesCardList from '../../components/MoviesCardList';
 import SearchForm from '../../components/SearchForm';
 import Header from '../../components/Header';
 import Preloader from '../../components/Preloader/Preloader';
-import { checkboxSavedStatusStorage, searchSavedRequestStorage } from '../../utils/storage';
 
 const SavedMovies = ({
   isLoading,
@@ -18,11 +17,11 @@ const SavedMovies = ({
   isSearchError,
   moviesOnInit,
 }) => {
-  const [searchValue, setSearchValue] = useState(searchSavedRequestStorage.get() || '');
+  const [searchValue, setSearchValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxSavedStatusStorage.get() || false);
+  const [checkBoxStatus, setCheckBoxStatus] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [moviesList, setMoviesList] = useState(moviesOnInit);
+  const [moviesList, setMoviesList] = useState(moviesOnInit || []);
   const handleInputChange = (e) => {
     if (!searchValue) setErrorMessage('');
     setSearchValue(e.target.value);
@@ -34,8 +33,7 @@ const SavedMovies = ({
       setErrorMessage('Нужно ввести ключевое слово');
       return;
     }
-    searchSavedRequestStorage.set(searchValue);
-    checkboxSavedStatusStorage.set(checkBoxStatus);
+    setMoviesList(movies);
     onFormSubmit(checkBoxStatus, searchValue);
   };
 
@@ -47,10 +45,6 @@ const SavedMovies = ({
       setIsDisabled(false);
     }, 250);
   };
-
-  React.useEffect(() => {
-    setMoviesList(movies);
-  }, [movies]);
 
   return (
     <>

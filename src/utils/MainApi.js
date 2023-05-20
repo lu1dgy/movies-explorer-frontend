@@ -98,7 +98,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  url: 'https://api.movies.lapkes.nomoredomains.monster',
+  // url: 'https://api.movies.lapkes.nomoredomains.monster',
+  url: 'http://localhost:3100',
   headers: {
     'Content-Type': 'application/json',
   },

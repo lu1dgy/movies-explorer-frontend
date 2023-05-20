@@ -294,6 +294,7 @@ const App = () => {
       .then((saved) => {
         setSavedMovies((movies) => [...movies, saved]);
         setUserSavedMovies((movies) => [...movies, saved]);
+        setInitialSavedMovies((movies) => [...movies, saved]);
         setFilteredMovies((movies) => [...movies, saved]);
         return saved;
       })
@@ -308,6 +309,7 @@ const App = () => {
       .then(() => {
         setUserSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
         setFilteredMovies((movies) => movies.filter((movie) => movie._id !== data));
+        setInitialSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
         setSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
       })
       .catch((err) => {
