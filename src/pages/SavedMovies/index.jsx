@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import MoviesCard from '../../components/MoviesCard';
 import MoviesCardList from '../../components/MoviesCardList';
@@ -21,7 +21,7 @@ const SavedMovies = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [checkBoxStatus, setCheckBoxStatus] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [moviesList, setMoviesList] = useState(moviesOnInit || []);
+  const [moviesList, setMoviesList] = useState(moviesOnInit);
   const handleInputChange = (e) => {
     if (!searchValue) setErrorMessage('');
     setSearchValue(e.target.value);
@@ -45,6 +45,14 @@ const SavedMovies = ({
       setIsDisabled(false);
     }, 250);
   };
+
+  useEffect(() => {
+    setMoviesList(movies);
+  }, [movies]);
+
+  useEffect(() => {
+    setMoviesList(moviesOnInit);
+  }, [moviesOnInit]);
 
   return (
     <>

@@ -40,7 +40,6 @@ const App = () => {
   const [commonMovies, setCommonMovies] = useState([]);
   const [slicedMovies, setSlicedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [initialSavedMovies, setInitialSavedMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [userSavedMovies, setUserSavedMovies] = useState([]);
   const [checkBoxStatus, setCheckBoxStatus] = useState(checkboxStatusStorage.get() || false);
@@ -184,7 +183,6 @@ const App = () => {
           return { ...movie, isLiked: true };
         });
         setSavedMovies(tmp);
-        setInitialSavedMovies(tmp);
         setUserSavedMovies(tmp);
       })
       .catch((err) => {
@@ -294,7 +292,6 @@ const App = () => {
       .then((saved) => {
         setSavedMovies((movies) => [...movies, saved]);
         setUserSavedMovies((movies) => [...movies, saved]);
-        setInitialSavedMovies((movies) => [...movies, saved]);
         setFilteredMovies((movies) => [...movies, saved]);
         return saved;
       })
@@ -309,7 +306,6 @@ const App = () => {
       .then(() => {
         setUserSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
         setFilteredMovies((movies) => movies.filter((movie) => movie._id !== data));
-        setInitialSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
         setSavedMovies((movies) => movies.filter((movie) => movie._id !== data));
       })
       .catch((err) => {
@@ -319,7 +315,7 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const savedMovie = initialSavedMovies.find((saved) => saved.movieId === movie.movieId);
+      const savedMovie = savedMovies.find((saved) => saved.movieId === movie.movieId);
       if (savedMovie) {
         return { ...movie, isLiked: true, _id: savedMovie._id };
       } else {
@@ -333,7 +329,6 @@ const App = () => {
     navigate('/');
     setCommonMovies([]);
     setUserSavedMovies([]);
-    setInitialSavedMovies([]);
     setSlicedMovies([]);
     setFilteredMovies([]);
     setSavedMovies([]);
@@ -438,8 +433,7 @@ const App = () => {
                 searchError={savedMoviesError}
                 isSearchError={isSavedError}
                 onFormSubmit={handleSaveSearchSubmit}
-                savedMovies={savedMovies}
-                moviesOnInit={initialSavedMovies}
+                moviesOnInit={savedMovies}
                 toggleDuration={toggleDuration}
               />
             }
