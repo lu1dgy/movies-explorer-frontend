@@ -46,9 +46,9 @@ const SavedMovies = ({
     }, 250);
   };
 
-  useEffect(() => {
-    setMoviesList(movies);
-  }, [movies]);
+  // useEffect(() => {
+  //   setMoviesList(movies);
+  // }, [movies]);
 
   useEffect(() => {
     setMoviesList(moviesOnInit);
@@ -71,12 +71,13 @@ const SavedMovies = ({
           <Preloader />
         ) : (
           <MoviesCardList searchError={searchError} isSearchError={isSearchError}>
-            {moviesList.map((movie, i) => (
+            {moviesList.map((movie) => (
               <MoviesCard
                 key={movie.movieId}
                 {...movie}
                 loggedIn={loggedIn}
                 deleteSavedMovie={deleteSavedMovie}
+                isLiked={true}
                 isSavedMovies={true}
               />
             ))}

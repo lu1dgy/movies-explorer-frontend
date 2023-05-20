@@ -287,11 +287,12 @@ const App = () => {
   };
 
   const addSavedMovie = (data) => {
+    debugger;
     return mainApi
       .addMovie(data)
       .then((saved) => {
-        setSavedMovies((movies) => [...movies, saved]);
         setUserSavedMovies((movies) => [...movies, saved]);
+        setSavedMovies((movies) => [...movies, saved]);
         setFilteredMovies((movies) => [...movies, saved]);
         return saved;
       })
@@ -301,6 +302,7 @@ const App = () => {
   };
 
   const deleteSavedMovie = (data) => {
+    debugger;
     mainApi
       .deleteMovie(data)
       .then(() => {
@@ -315,7 +317,7 @@ const App = () => {
 
   const isLikedMovie = (arr) => {
     return arr?.map((movie) => {
-      const savedMovie = savedMovies.find((saved) => saved.movieId === movie.movieId);
+      const savedMovie = userSavedMovies.find((saved) => saved.movieId === movie.movieId);
       if (savedMovie) {
         return { ...movie, isLiked: true, _id: savedMovie._id };
       } else {
@@ -427,13 +429,13 @@ const App = () => {
               <ProtectedRoute
                 element={SavedMovies}
                 movies={userSavedMovies}
+                moviesOnInit={savedMovies}
                 loggedIn={loggedIn}
                 isLoading={loading}
                 deleteSavedMovie={deleteSavedMovie}
                 searchError={savedMoviesError}
                 isSearchError={isSavedError}
                 onFormSubmit={handleSaveSearchSubmit}
-                moviesOnInit={savedMovies}
                 toggleDuration={toggleDuration}
               />
             }

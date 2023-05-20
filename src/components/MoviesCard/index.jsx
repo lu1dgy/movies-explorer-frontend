@@ -13,6 +13,7 @@ const MoviesCard = (props) => {
   };
 
   const handleLike = async () => {
+    debugger;
     try {
       if (props.isLiked) {
         await props.deleteSavedMovie(props._id);
