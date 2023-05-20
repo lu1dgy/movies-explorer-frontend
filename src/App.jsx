@@ -381,7 +381,7 @@ const App = () => {
       }
     };
 
-    if (filteredMoviesStorage.get().length > 0) {
+    if (filteredMoviesStorage.get()?.length > 0) {
       fetchStoredMovies();
     } else {
       fetchMovies();
