@@ -1,0 +1,141 @@
+.form {
+  background-color: #fff;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 80px 70px 39px;
+  gap: 30px;
+}
+
+.form__fieldset {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: none;
+  border: none;
+  gap: 10px;
+}
+
+.form__input {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  border: 0;
+  padding-left: 22px;
+  height: 48px;
+}
+
+.form__validation {
+  font-size: 12px;
+  color: #ff0000;
+  top: 20px;
+  position: relative;
+}
+
+.form__input::placeholder {
+  padding: 15px 0 15px 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.form__submit {
+  width: 70px;
+  height: 44px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+  border: 0;
+  cursor: pointer;
+}
+
+.form__submit:hover {
+  opacity: 0.7;
+}
+
+.form__checkblock {
+  display: flex;
+  align-self: center;
+  gap: 12px;
+}
+
+.form__label {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.form__checkbox {
+  margin: 0;
+  padding: 0;
+  width: 36px;
+  height: 22px;
+  position: relative;
+  outline: none;
+  background: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  appearance: none;
+  border-radius: 16px;
+  box-shadow: 0px 4px 4px rgba(47, 47, 67, 0.09), 0px 4px 8px rgba(47, 47, 67, 0.07);
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+
+.form__checkbox::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #f9f9f9;
+  border-radius: 50%;
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: left 800ms;
+}
+
+.form__checkbox:checked {
+  box-shadow: inset 50px 0 0 0 #2be080;
+}
+
+.form__checkbox:checked::after {
+  left: 20px;
+  background: #fff;
+}
+
+@media screen and (max-width: 1279px) {
+  .form__container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .form__container {
+    padding: 81px 14px 43px;
+    gap: 44px;
+  }
+
+  .form__input::placeholder {
+    padding: 13px 0 13px 16px;
+    font-size: 12px;
+  }
+
+  .form__input {
+    height: 44px;
+  }
+
+  .form__checkblock {
+    gap: 13px;
+  }
+
+  .form__label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}

@@ -1,0 +1,162 @@
+.aboutme {
+  background-color: #fff;
+}
+
+.aboutme__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  gap: 70px;
+  padding: 90px 70px;
+}
+
+.aboutme__articleContainer {
+  display: flex;
+  gap: 30px;
+}
+
+.aboutme__article {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.aboutme__heading {
+  font-size: 22px;
+  line-height: 27px;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #000;
+}
+
+.aboutme__subheading {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.aboutme__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.aboutme__bar {
+  margin-top: 40px;
+  display: flex;
+  align-self: center;
+}
+
+.aboutme__blackBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 228px;
+  height: 36px;
+  color: #fff;
+  background-color: #000;
+  text-align: center;
+}
+
+.aboutme__greyBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 912px;
+  height: 36px;
+  color: #000;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.aboutme__barContainer {
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.aboutme__barText {
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+@media screen and (max-width: 1279px) {
+  .aboutme__container {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+
+  .aboutme__greyBar {
+    width: 528px;
+  }
+
+  .aboutme__blackBar {
+    width: 140px;
+  }
+
+  .aboutme__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutme__articleContainer {
+    gap: 22px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .aboutme__container {
+    padding: 70px 18px;
+    gap: 60px;
+  }
+
+  .aboutme__greyBar {
+    width: 184px;
+  }
+
+  .aboutme__blackBar {
+    width: 100px;
+  }
+
+  .aboutme__articleContainer {
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .aboutme__article {
+    gap: 16px;
+  }
+
+  .aboutme__bar {
+    margin-top: 0;
+  }
+
+  .aboutme__heading {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 27px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid #000;
+  }
+
+  .aboutme__subheading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutme__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutme__barContainer {
+    font-size: 14px;
+    line-height: 17px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

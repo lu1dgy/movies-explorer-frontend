@@ -1,0 +1,145 @@
+.about {
+  background-color: #fff;
+}
+
+.about__heading {
+  font-size: 22px;
+  line-height: 27px;
+  padding-bottom: 23px;
+  letter-spacing: -0.04em;
+  border-bottom: 1px solid #000;
+}
+
+.about__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 110px 70px 100px;
+}
+
+.about__profession {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.about__portfolio {
+  display: flex;
+  margin-top: 66px;
+  gap: 270px;
+}
+
+.about__name {
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.about__information {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about__text {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.about__link {
+  margin-top: 81px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000;
+}
+
+.about__avatar {
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1279px) {
+  .about__container {
+    padding: 90px 50px;
+  }
+
+  .about__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about__profession {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 4px;
+  }
+
+  .about__avatar {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about__information {
+    gap: 16px;
+  }
+
+  .about__link {
+    margin-top: 71px;
+  }
+
+  .about__portfolio {
+    gap: 49px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .about__container {
+    padding: 70px 14px;
+  }
+
+  .about__portfolio {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .about__heading {
+    padding-bottom: 28px;
+  }
+
+  .about__avatar {
+    width: 292px;
+    height: 352px;
+  }
+
+  .about__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .about__profession {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__link {
+    margin-top: 24px;
+  }
+}
